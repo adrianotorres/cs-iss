@@ -1,0 +1,21 @@
+version: '3.7'
+services:
+  cs-pg:
+    image: 'postgres:latest'
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: postgres
+
+  cs-iss-web:
+    build:
+      dockerfile: ./Dockerfile.dev
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/rails
+    depends_on:
+      - cs-pg
+
+volumes:
+  postgres:

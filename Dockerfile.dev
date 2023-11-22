@@ -1,0 +1,28 @@
+# syntax = docker/dockerfile:1
+
+# Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
+ARG RUBY_VERSION=3.2.0
+FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim as base
+
+RUN apt-get update -qq && apt-get install -y build-essential apt-utils libpq-dev nodejs
+
+# Rails app lives here
+WORKDIR /rails
+
+RUN gem install bundler
+
+# Throw-away build stage to reduce size of final image
+FROM base as build
+
+# Install application gems
+COPY Gemfile Gemfile.lock ./
+RUN bundle install
+
+# Copy application code
+COPY . /rails
+
+ARG DEFAULT_PORT 3000
+
+EXPOSE ${DEFAULT_PORT}
+
+CMD [ "bundle","exec", "puma", "config.ru"]
