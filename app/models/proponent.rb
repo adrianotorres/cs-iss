@@ -1,0 +1,36 @@
+# frozen_string_literal: true
+
+# Proponent
+#
+# The `Proponent` model represents an applicant in the system.
+# Proponents are individuals who provide information such as name,
+# CPF (Brazilian social security number), birthday, and salary.
+#
+# Attributes:
+# - `name`: The name of the proponent.
+# - `cpf`: The CPF (unique) of the proponent.
+# - `birthday`: The birthday of the proponent.
+# - `salary`: The salary of the proponent.
+#
+# Usage Example:
+# ```ruby
+# proponent = Proponent.new(name: "John Doe", cpf: "123.456.789-09", birthday: Date.new(1980, 1, 1), salary: 5000.0)
+# proponent.save
+# ```
+#
+# Validations:
+# - `name`: Must be present.
+# - `cpf`: Must be unique and present.
+# - `birthday`: Must be a valid date.
+# - `salary`: Can be a decimal number.
+#
+class Proponent < ApplicationRecord
+  encrypts :cpf, deterministic: true
+  encrypts :salary, deterministic: true
+
+  validates :name, presence: true
+  validates :cpf, presence: true, uniqueness: true
+  validates :salary, presence: true
+
+  scope :with_cpf, ->(cpf) { where cpf: }
+end
