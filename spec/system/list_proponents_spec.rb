@@ -28,7 +28,7 @@ RSpec.describe 'ListProponents', type: :system do
       create_list(:proponent, 8)
 
       visit proponents_path
-      click_link('Next ›')
+      click_link('Next')
 
       expect(page).to have_selector('.record', count: 3)
     end

@@ -1,0 +1,22 @@
+<div class="container mt-3">
+  <h1 class="display-4">Novo Proponente</h1>
+  <%= simple_form_for @proponent_form, url: proponents_path, method: :post, class: 'mt-4' do |form| %>
+  <%= form.input :name %>
+  <%= form.input :cpf %>
+  <%= form.input :birthday, as: :date, start_year: Date.today.year - 90, end_year: Date.today.year - 18 %>
+  <%= form.input :salary %>
+
+  <%= form.submit 'Criar Proponente', class: 'btn btn-primary' %>
+  <% end %>
+
+  <%= link_to 'Voltar para a lista de proponentes', proponents_path, class: 'btn btn-secondary mt-3' %>
+</div>
+
+<script type="module">
+  import Inputmask from 'inputmask';
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const inputmask = Inputmask.default;
+    inputmask('999.999.999-99').mask(document.getElementById('proponent_form_cpf'));
+  });
+</script>
