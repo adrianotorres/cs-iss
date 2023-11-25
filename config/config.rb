@@ -3,5 +3,6 @@
 module CsIss
   Config = SuperConfig.new do
     mandatory :database_url, string
+    mandatory :locale, string
   end
 end

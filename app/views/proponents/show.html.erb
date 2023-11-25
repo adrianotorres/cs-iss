@@ -1,0 +1,16 @@
+<div class="container mt-3">
+  <% if notice %>
+    <div class="alert alert-success" role="alert">
+      <%= notice %>
+    </div>
+  <% end %>
+
+  <h1>Detalhes do Proponente</h1>
+
+  <p><strong>Nome:</strong> <%= @proponent.name %></p>
+  <p><strong>CPF:</strong> <%= @proponent.cpf %></p>
+  <p><strong>Data de Nascimento:</strong> <%= @proponent.birthday %></p>
+  <p><strong>Salário:</strong> <%= @proponent.salary %></p>
+
+  <%= link_to 'Voltar para a lista de proponentes', proponents_path, class: 'btn btn-secondary' %>
+</div>

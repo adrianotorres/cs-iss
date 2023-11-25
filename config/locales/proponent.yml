@@ -1,0 +1,27 @@
+pt-BR:
+  proponent:
+    buttons:
+      link_to_create: 'Crie um novo Proponente'
+      create: 'Criar Proponente'
+    headers:
+      new: 'Novo Proponente'
+    messages:
+      create_successfully: 'Proponente criado com sucesso'
+  activemodel:
+    attributes:
+      proponent_form:
+        name: 'Nome'
+        cpf: 'CPF'
+        birthday: 'Data de Nascimento'
+        salary: 'Salário'
+    errors:
+      models:
+        proponent_form:
+          attributes:
+            name:
+              blank: 'não pode ficar em branco!'
+            cpf:
+              blank: 'não pode ficar em branco!'
+              invalid: 'não é válido!'
+            salary:
+              blank: 'não pode ficar em branco!'
