@@ -10,9 +10,9 @@
 class ProponentForm
   include ActiveModel::Model
 
-  attr_accessor :name, :cpf, :birthday, :salary
+  attr_accessor :name, :cpf, :birthday, :salary, :street, :number, :district, :city, :state, :zip_code
 
-  validates :name, :cpf, :salary, presence: true
+  validates :name, :cpf, :salary, :street, :number, :district, :city, :state, presence: true
   validate :valid_cpf
 
   def initialize(attrs = {})
@@ -21,7 +21,13 @@ class ProponentForm
   end
 
   def as_proponent
-    { name:, cpf:, birthday:, salary: }
+    {
+      name:,
+      cpf:,
+      birthday:,
+      salary:,
+      address: Address.new(address_attributes)
+    }
   end
 
   private
@@ -30,5 +36,16 @@ class ProponentForm
     return if cpf.blank? || CPF.valid?(cpf)
 
     errors.add(:cpf, I18n.t('activemodel.errors.models.proponent_form.attributes.cpf.invalid'))
+  end
+
+  def address_attributes
+    {
+      street:,
+      number:,
+      district:,
+      city:,
+      state:,
+      zip_code:
+    }
   end
 end

@@ -12,9 +12,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 20_231_123_020_606) do
+ActiveRecord::Schema[7.1].define(version: 20_231_125_134_829) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
+
+  create_table 'addresses', force: :cascade do |t|
+    t.string 'street'
+    t.string 'number'
+    t.string 'district'
+    t.string 'city'
+    t.string 'state'
+    t.string 'zip_code'
+    t.bigint 'proponent_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['proponent_id'], name: 'index_addresses_on_proponent_id'
+  end
 
   create_table 'proponents', force: :cascade do |t|
     t.string 'name', null: false
@@ -25,4 +38,6 @@ ActiveRecord::Schema[7.1].define(version: 20_231_123_020_606) do
     t.datetime 'updated_at', null: false
     t.index ['cpf'], name: 'index_proponents_on_cpf', unique: true
   end
+
+  add_foreign_key 'addresses', 'proponents'
 end

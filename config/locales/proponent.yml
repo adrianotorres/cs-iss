@@ -14,14 +14,16 @@ pt-BR:
         cpf: 'CPF'
         birthday: 'Data de Nascimento'
         salary: 'Salário'
+        street: 'Rua'
+        number: 'Número'
+        district: 'Bairro'
+        city: 'Cidade'
+        state: 'Estado'
+        zip_code: 'CEP'
     errors:
       models:
         proponent_form:
+          blank: 'não pode ficar em branco!'
           attributes:
-            name:
-              blank: 'não pode ficar em branco!'
             cpf:
-              blank: 'não pode ficar em branco!'
               invalid: 'não é válido!'
-            salary:
-              blank: 'não pode ficar em branco!'

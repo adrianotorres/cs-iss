@@ -1,4 +1,8 @@
 pt-BR:
+  activerecord:
+    errors:
+      messages:
+        taken: 'já casdastrado!'
   date:
     formats:
       default: "%d/%m/%Y"
@@ -12,3 +16,8 @@ pt-BR:
       - :day
       - :month
       - :year
+  messages:
+    errors:
+      not_found:
+        title: 'Página não encontrada'
+        description: 'Desculpe, a página que você está procurando não existe.'

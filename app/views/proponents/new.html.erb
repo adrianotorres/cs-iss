@@ -1,12 +1,32 @@
 <div class="container mt-3">
-  <h1 class="display-4">Novo Proponente</h1>
+  <h1 class="display-4"><%= I18n.t('proponent.headers.new') %></h1>
   <%= simple_form_for @proponent_form, url: proponents_path, method: :post, class: 'mt-4' do |form| %>
-  <%= form.input :name %>
-  <%= form.input :cpf %>
-  <%= form.input :birthday, as: :date, start_year: Date.today.year - 90, end_year: Date.today.year - 18 %>
-  <%= form.input :salary %>
-
-  <%= form.submit 'Criar Proponente', class: 'btn btn-primary' %>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= form.input :name %>
+          <%= form.input :cpf %>
+          <%= form.input :birthday, as: :date, start_year: Date.today.year - 90, end_year: Date.today.year - 18 %>
+          <%= form.input :salary %>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <fieldset>
+          <legend>address</legend>
+          <div class="form-group">
+            <%= form.input :street %>
+            <%= form.input :number %>
+            <%= form.input :district %>
+            <%= form.input :city %>
+            <%= form.input :state %>
+            <%= form.input :zip_code %>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= form.submit I18n.t('proponent.buttons.create'), class: 'btn btn-primary' %>
+    </div>
   <% end %>
 
   <%= link_to 'Voltar para a lista de proponentes', proponents_path, class: 'btn btn-secondary mt-3' %>
