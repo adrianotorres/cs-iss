@@ -33,7 +33,7 @@ class ProponentsController < ApplicationController
   end
 
   def show
-    @proponent = Proponent.find(params[:id])
+    @proponent_presenter = ProponentPresenter.new(Proponent.find(params[:id]))
   end
 
   private
@@ -43,12 +43,7 @@ class ProponentsController < ApplicationController
   end
 
   def proponent_form_attributes
-    {
-      birthday: build_birthday,
-      name: params[:proponent_form][:name],
-      cpf: params[:proponent_form][:cpf],
-      salary: params[:proponent_form][:salary]
-    }
+    { birthday: build_birthday }.merge proponent_form_params.except('birthday(1i)', 'birthday(2i)', 'birthday(3i)')
   end
 
   def build_birthday
@@ -60,7 +55,10 @@ class ProponentsController < ApplicationController
   end
 
   def proponent_form_params
-    params.require(:proponent_form).permit(:name, :cpf, :birthday, :salary)
+    params.require(:proponent_form).permit(
+      :name, :cpf, :birthday, :salary,
+      :street, :number, :district, :city, :state, :zip_code
+    )
   end
 
   def create_proponent
