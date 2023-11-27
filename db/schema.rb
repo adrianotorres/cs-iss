@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -12,32 +10,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 20_231_125_134_829) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_25_182227) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension 'plpgsql'
+  enable_extension "plpgsql"
 
-  create_table 'addresses', force: :cascade do |t|
-    t.string 'street'
-    t.string 'number'
-    t.string 'district'
-    t.string 'city'
-    t.string 'state'
-    t.string 'zip_code'
-    t.bigint 'proponent_id', null: false
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.index ['proponent_id'], name: 'index_addresses_on_proponent_id'
+  create_table "addresses", force: :cascade do |t|
+    t.string "street"
+    t.string "number"
+    t.string "district"
+    t.string "city"
+    t.string "state"
+    t.string "zip_code"
+    t.bigint "proponent_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["proponent_id"], name: "index_addresses_on_proponent_id"
   end
 
-  create_table 'proponents', force: :cascade do |t|
-    t.string 'name', null: false
-    t.jsonb 'cpf', null: false
-    t.jsonb 'salary', null: false
-    t.date 'birthday'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.index ['cpf'], name: 'index_proponents_on_cpf', unique: true
+  create_table "phones", force: :cascade do |t|
+    t.bigint "proponent_id", null: false
+    t.string "area_code"
+    t.string "number"
+    t.integer "phone_type", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["proponent_id"], name: "index_phones_on_proponent_id"
   end
 
-  add_foreign_key 'addresses', 'proponents'
+  create_table "proponents", force: :cascade do |t|
+    t.string "name", null: false
+    t.jsonb "cpf", null: false
+    t.jsonb "salary", null: false
+    t.date "birthday"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cpf"], name: "index_proponents_on_cpf", unique: true
+  end
+
+  add_foreign_key "addresses", "proponents"
+  add_foreign_key "phones", "proponents"
 end

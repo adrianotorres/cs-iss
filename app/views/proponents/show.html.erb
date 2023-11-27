@@ -7,28 +7,43 @@
 
   <div class="row">
     <div class="col-md-6">
-      <p><strong><%= I18n.t('activemodel.attributes.proponent_form.name')%>:</strong> <%= @proponent_presenter.name %></p>
-      <p><strong><%= I18n.t('activemodel.attributes.proponent_form.cpf')%>:</strong> <%= @proponent_presenter.cpf %></p>
-      <p><strong><%= I18n.t('activemodel.attributes.proponent_form.birthday')%>:</strong> <%= I18n.l(@proponent_presenter.birthday) %></p>
-      <p><strong><%= I18n.t('activemodel.attributes.proponent_form.salary')%>:</strong> <%= @proponent_presenter.salary %></p>
+      <p><strong><%= t('activemodel.attributes.proponent_form.name')%>:</strong> <%= @proponent_presenter.name %></p>
+      <p><strong><%= t('activemodel.attributes.proponent_form.cpf')%>:</strong> <%= @proponent_presenter.cpf %></p>
+      <p><strong><%= t('activemodel.attributes.proponent_form.birthday')%>:</strong> <%= I18n.l(@proponent_presenter.birthday) %></p>
+      <p><strong><%= t('activemodel.attributes.proponent_form.salary')%>:</strong> <%= @proponent_presenter.salary %></p>
     </div>
 
     <% if @proponent_presenter.street.present? %>
       <div class="col-md-6">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Endereço</h5>
-            <p class="card-text"><strong><%= I18n.t('activemodel.attributes.proponent_form.street')%>:</strong> <%= @proponent_presenter.street %></p>
-            <p class="card-text"><strong><%= I18n.t('activemodel.attributes.proponent_form.number')%>:</strong> <%= @proponent_presenter.number %></p>
-            <p class="card-text"><strong><%= I18n.t('activemodel.attributes.proponent_form.district')%>:</strong> <%= @proponent_presenter.district %></p>
-            <p class="card-text"><strong><%= I18n.t('activemodel.attributes.proponent_form.city')%>:</strong> <%= @proponent_presenter.city %></p>
-            <p class="card-text"><strong><%= I18n.t('activemodel.attributes.proponent_form.state')%>:</strong> <%= @proponent_presenter.state %></p>
-            <p class="card-text"><strong><%= I18n.t('activemodel.attributes.proponent_form.zip_code')%>:</strong> <%= @proponent_presenter.zip_code %></p>
+            <h5 class="card-title"><%= t('.labels.address') %></h5>
+            <p class="card-text"><strong><%= t('activemodel.attributes.proponent_form.street')%>:</strong> <%= @proponent_presenter.street %></p>
+            <p class="card-text"><strong><%= t('activemodel.attributes.proponent_form.number')%>:</strong> <%= @proponent_presenter.number %></p>
+            <p class="card-text"><strong><%= t('activemodel.attributes.proponent_form.district')%>:</strong> <%= @proponent_presenter.district %></p>
+            <p class="card-text"><strong><%= t('activemodel.attributes.proponent_form.city')%>:</strong> <%= @proponent_presenter.city %></p>
+            <p class="card-text"><strong><%= t('activemodel.attributes.proponent_form.state')%>:</strong> <%= @proponent_presenter.state %></p>
+            <p class="card-text"><strong><%= t('activemodel.attributes.proponent_form.zip_code')%>:</strong> <%= @proponent_presenter.zip_code %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="row">
+    <% @proponent_presenter.phones.each do |phone| %>
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><%= t(".labels.#{phone.phone_type}_phone") %></h5>
+            <p class="card-text">
+              <strong><%= t('activerecord.attributes.phone.number') %>:</strong>
+              <%= phone.number %>
+            </p>
           </div>
         </div>
       </div>
     <% end %>
   </div>
 
-  <%= link_to 'Voltar para a lista de proponentes', proponents_path, class: 'btn btn-secondary' %>
+  <%= link_to t('.buttons.back'), proponents_path, class: 'btn btn-secondary' %>
 </div>

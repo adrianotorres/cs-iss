@@ -21,6 +21,18 @@
       city: 'Fortaleza',
       state: 'Ceará',
       zip_code: '61500-000'
-    )
+    ),
+    phones: [
+      Phone.new(
+        area_code: "8#{n}",
+        number: "#{''.rjust(5, '9')}-#{n.to_s.rjust(4, '9')}",
+        phone_type: :personal
+      ),
+      Phone.new(
+        area_code: "8#{n}",
+        number: "#{''.rjust(5, '9')}-#{(n+1).to_s.rjust(4, '9')}",
+        phone_type: :reference
+      )
+    ]
   )
 end
