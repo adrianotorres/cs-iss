@@ -57,7 +57,8 @@ class ProponentsController < ApplicationController
   def proponent_form_params
     params.require(:proponent_form).permit(
       :name, :cpf, :birthday, :salary,
-      :street, :number, :district, :city, :state, :zip_code
+      :street, :number, :district, :city, :state, :zip_code,
+      phones: %i[area_code number phone_type]
     )
   end
 

@@ -48,4 +48,8 @@ class ProponentPresenter
   def zip_code
     @proponent.address&.zip_code
   end
+
+  def phones
+    @proponent.phones
+  end
 end

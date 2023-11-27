@@ -26,6 +26,7 @@
 #
 class Proponent < ApplicationRecord
   has_one :address, dependent: :destroy
+  has_many :phones, dependent: :destroy
 
   encrypts :cpf, deterministic: true
   encrypts :salary, deterministic: true

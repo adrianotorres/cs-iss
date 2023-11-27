@@ -8,7 +8,11 @@ FactoryBot.define do
     salary { rand(90_000..850_000) / 100.0 }
 
     trait :with_address do
-      association :address, factory: :address
+      address
+    end
+
+    trait :with_phones do
+      phones { [build(:personal_phone), build(:reference_phone)] }
     end
   end
 end

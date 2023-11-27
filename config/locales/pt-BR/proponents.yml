@@ -1,0 +1,52 @@
+pt-BR:
+  proponents:
+    new:
+      title: Novo Proponente
+      buttons:
+        create: Criar Proponente
+        back: Voltar para a lista de proponentes
+    show:
+      buttons:
+        back: Voltar para a lista de proponentes
+      labels:
+        address: Endereço
+        personal_phone: Telefone Pessoal
+        reference_phone: Telefone de Referência
+    index:
+      title: Proponentes
+      header:
+        name: Nome
+        action: Ações
+      buttons:
+        show: Visualizar
+        edit: Editar
+        delete: Apagar
+        create: Crie um novo Proponente
+    messages:
+      create_successfully: Proponente criado com sucesso
+  activemodel:
+    attributes:
+      proponent_form:
+        name: Nome
+        cpf: CPF
+        birthday: Data de Nascimento
+        salary: Salário
+        street: Rua
+        number: Número
+        district: Bairro
+        city: Cidade
+        state: Estado
+        zip_code: CEP
+        phones:
+          area_code: DDD
+          number: Telefone
+          type: Tipo de contato
+    errors:
+      models:
+        proponent_form:
+          blank: não pode ficar em branco!
+          attributes:
+            cpf:
+              invalid: não é válido!
+            phones:
+              blank: Informe pelo menos um telefone para contato!

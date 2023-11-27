@@ -1,5 +1,5 @@
 <div class="flex-column" style = "height: auto;">
-  <h1> Proponentes </h1>
+  <h1> <%= t('.title') %> </h1>
   <!--Error Message-->
   <% if flash[:errors] %>
     <% flash.each do |name,message| %>
@@ -11,15 +11,15 @@
     <table class="table table-info table-striped">
       <ol class="fs-2">
         <thead class="table-secondary">
-          <td class="text-center"> Name </td>
-          <td colspan=3 class="text-center"> Action </td>
+          <td class="text-center"> <%= t('.header.name') %> </td>
+          <td colspan=3 class="text-center"> <%= t('.header.action') %> </td>
         </thead>
         <% @proponent_list.items.each do |proponent| %>
           <tr class="record">
             <td class="text-center"><%= link_to proponent.name, proponent_path(proponent) %> </td>
-            <td class="text-center"><%= button_to "Show", proponent_path(proponent), method: :get, class:"btn-success border-0 rounded-pill shadow px-3 py-2" %></td>
-            <td class="text-center"><%= button_to "Edit", edit_proponent_path(proponent), method: :get, class:"btn-primary border-0 rounded-pill shadow px-3 py-2" %></td>
-            <td class="text-center"><%= button_to "Delete", proponent_path(proponent), method: :delete, class:"btn-danger border-0 rounded-pill shadow px-3 py-2" %></td>
+            <td class="text-center"><%= button_to t('.buttons.show'), proponent_path(proponent), method: :get, class:"btn-success border-0 rounded-pill shadow px-3 py-2" %></td>
+            <td class="text-center"><%= button_to t('.buttons.edit'), edit_proponent_path(proponent), method: :get, class:"btn-primary border-0 rounded-pill shadow px-3 py-2" %></td>
+            <td class="text-center"><%= button_to t('.buttons.delete'), proponent_path(proponent), method: :delete, class:"btn-danger border-0 rounded-pill shadow px-3 py-2" %></td>
           </tr>
         <% end %>
       </ol>
@@ -27,6 +27,6 @@
     <%= paginate @proponent_list.items %>
   </div>
   <div class="d-flex">
-    <%= button_to "Crie um novo Proponente", new_proponent_path, method: :get , class:"btn-warning border-0 rounded-pill shadow p-3 m-3" %>
+    <%= button_to t('.buttons.create'), new_proponent_path, method: :get , class:"btn-warning border-0 rounded-pill shadow p-3 m-3" %>
   </div>
 </div>

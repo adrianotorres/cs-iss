@@ -1,11 +1,11 @@
 <div class="container mt-3">
-  <h1 class="display-4"><%= I18n.t('proponent.headers.new') %></h1>
+  <h1 class="display-4"><%= t('.title') %></h1>
   <%= simple_form_for @proponent_form, url: proponents_path, method: :post, class: 'mt-4' do |form| %>
     <div class="row">
       <div class="col-md-6">
         <div class="form-group">
           <%= form.input :name %>
-          <%= form.input :cpf %>
+          <%= form.input :cpf, input_html: { data: { controller: 'cpf-mask' } } %>
           <%= form.input :birthday, as: :date, start_year: Date.today.year - 90, end_year: Date.today.year - 18 %>
           <%= form.input :salary %>
         </div>
@@ -23,20 +23,33 @@
           </div>
         </fieldset>
       </div>
+      <div id="phones-container" data-controller="phone-form" data-target="phone-form">
+        <%= form.fields_for :phones, [Phone.new], child_index: Time.now.to_i do |phone_form| %>
+          <div class="row phone-row form-group" data-phone-form-target="phoneRow">
+            <div class="col-md-2">
+              <%= phone_form.input :area_code %>
+            </div>
+            <div class="col-md-4">
+              <%= phone_form.input :number %>
+            </div>
+            <div class="col-md-4">
+              <%= phone_form.input :phone_type, as: :select, collection: Phone.phone_types.keys.map { |type| [t("activerecord.attributes.phone.phone_types.#{type}"), type] }, include_blank: false %>
+            </div>
+            <div class="col-md-2">
+              <button data-action="click->phone-form#addPhone" type="button" class="btn btn-success add-phone-btn">+</button>
+              <button data-action="click->phone-form#removePhone" type="button" class="btn btn-danger remove-phone-btn d-none">-</button>
+            </div>
+          </div>
+        <% end %>
+        <% if @proponent_form.errors[:phones].present? %>
+          <p class="text-danger"><%= @proponent_form.errors[:phones].first %></p>
+        <% end %>
+      </div>
     </div>
     <div class="form-group">
-      <%= form.submit I18n.t('proponent.buttons.create'), class: 'btn btn-primary' %>
+      <%= form.submit t('.buttons.create'), class: 'btn btn-primary' %>
     </div>
   <% end %>
 
-  <%= link_to 'Voltar para a lista de proponentes', proponents_path, class: 'btn btn-secondary mt-3' %>
+  <%= link_to t('.buttons.back'), proponents_path, class: 'btn btn-secondary mt-3' %>
 </div>
-
-<script type="module">
-  import Inputmask from 'inputmask';
-
-  document.addEventListener('DOMContentLoaded', function() {
-    const inputmask = Inputmask.default;
-    inputmask('999.999.999-99').mask(document.getElementById('proponent_form_cpf'));
-  });
-</script>

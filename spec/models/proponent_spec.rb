@@ -3,6 +3,11 @@
 require 'rails_helper'
 
 RSpec.describe Proponent, type: :model do
+  describe 'relations' do
+    it { should have_one(:address) }
+    it { should have_many(:phones) }
+  end
+
   describe 'validations' do
     subject { create(:proponent) }
     it { should validate_presence_of(:name) }
