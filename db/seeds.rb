@@ -4,14 +4,17 @@
 # development, test). The code here should be idempotent so that it can be executed at any point in every environment.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 #
+# rubocop:disable Metrics
 10.times do |n|
   cpf = n.to_s.rjust(11, n.to_s).gsub(/(\d{3})(\d{3})(\d{3})(\d{2})/, '\1.\2.\3-\4')
 
   next if Proponent.with_cpf(cpf).exists?
 
+  salary = rand(90_000..850_000) / 100.0
   Proponent.create(
     name: "João da Silva - #{n}",
-    salary: rand(90_000..850_000) / 100.0,
+    salary:,
+    inss: InssCalculator.new(salary).calculate_discount,
     birthday: Date.today - rand(18 * 365..90 * 365),
     cpf:,
     address: Address.new(
@@ -30,9 +33,10 @@
       ),
       Phone.new(
         area_code: "8#{n}",
-        number: "#{''.rjust(5, '9')}-#{(n+1).to_s.rjust(4, '9')}",
+        number: "#{''.rjust(5, '9')}-#{(n + 1).to_s.rjust(4, '9')}",
         phone_type: :reference
       )
     ]
   )
 end
+# rubocop:enable Metrics

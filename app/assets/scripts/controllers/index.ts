@@ -2,16 +2,18 @@
 
 import { Application } from "@hotwired/stimulus"
 
-import { CpfMask } from "./cpfMask"
 import { PhoneForm } from "./phoneForm"
+import { ProponentFormController } from "./proponents/form"
+import { ProponentPresenterController } from "./proponents/presenter"
 
 const application = Application.start()
 
 declare const window: Window &
   typeof globalThis & { Stimulus: typeof application}
 
-application.register('cpf-mask', CpfMask)
 application.register('phone-form', PhoneForm)
+application.register('proponent-form', ProponentFormController)
+application.register('proponent-presenter', ProponentPresenterController)
 
 // Configure Stimulus development experience
 application.debug = false

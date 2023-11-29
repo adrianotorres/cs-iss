@@ -1,4 +1,4 @@
-<div class="container mt-3">
+<div class="container mt-3" data-controller="proponent-presenter">
   <% if notice %>
     <div class="alert alert-success" role="alert">
       <%= notice %>
@@ -10,7 +10,8 @@
       <p><strong><%= t('activemodel.attributes.proponent_form.name')%>:</strong> <%= @proponent_presenter.name %></p>
       <p><strong><%= t('activemodel.attributes.proponent_form.cpf')%>:</strong> <%= @proponent_presenter.cpf %></p>
       <p><strong><%= t('activemodel.attributes.proponent_form.birthday')%>:</strong> <%= I18n.l(@proponent_presenter.birthday) %></p>
-      <p><strong><%= t('activemodel.attributes.proponent_form.salary')%>:</strong> <%= @proponent_presenter.salary %></p>
+      <p><strong><%= t('activemodel.attributes.proponent_form.salary')%>:</strong> <span data-proponent-presenter-target="salary"><%= @proponent_presenter.salary %></span></span></p>
+      <p><strong><%= t('activemodel.attributes.proponent_form.inss')%>:</strong> <span data-proponent-presenter-target="inss"><%= @proponent_presenter.inss %></span></span></p>
     </div>
 
     <% if @proponent_presenter.street.present? %>

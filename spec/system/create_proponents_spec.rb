@@ -5,7 +5,7 @@ require 'rails_helper'
 # rubocop:disable Metrics/BlockLength
 RSpec.describe 'CreateProponents', type: :system do
   before do
-    driven_by(:rack_test)
+    driven_by :selenium, using: :headless_chrome, screen_size: [1400, 1400]
   end
 
   context 'navigation' do
@@ -24,6 +24,7 @@ RSpec.describe 'CreateProponents', type: :system do
     let(:address) { proponent.address }
     let(:personal_phone) { proponent.phones.find(&:personal?) }
     let(:reference_phone) { proponent.phones.find(&:reference?) }
+    let(:proponent_presenter) { build(:proponent_presenter, proponent: Proponent.last) }
 
     it 'should be able to create a new proponent' do
       visit new_proponent_path
@@ -56,10 +57,15 @@ RSpec.describe 'CreateProponents', type: :system do
       click_button t('proponents.new.buttons.create')
 
       expect(page).to have_content(t('proponents.messages.create_successfully'))
-      expect(page).to have_content("#{form_label(:proponent_form, :name)}: #{proponent.name}")
-      expect(page).to have_content("#{form_label(:proponent_form, :street)}: #{address.street}")
+      expect(page).to have_content("#{form_label(:proponent_form, :name)}: #{proponent_presenter.name}")
+      expect(page).to have_content("#{form_label(:proponent_form, :cpf)}: #{proponent_presenter.cpf}")
+      expect(page).to have_content("#{form_label(:proponent_form, :salary)}: "\
+        "#{format_currency(proponent_presenter.salary)}")
+      expect(page).to have_content("#{form_label(:proponent_form, :inss)}: "\
+        "#{format_currency(proponent_presenter.inss)}")
+      expect(page).to have_content("#{form_label(:proponent_form, :street)}: #{proponent_presenter.street}")
       # expect(page).to have_content("#{model_label(:phone, :number)}: #{personal_phone.number}")
-      expect(page).to have_content("#{model_label(:phone, :number)}: #{reference_phone.number}")
+      expect(page).to have_content("#{model_label(:phone, :number)}: #{proponent_presenter.phones.first.number}")
     end
 
     it 'should not be able to create a new proponent with an invalid cpf' do
@@ -88,6 +94,7 @@ RSpec.describe 'CreateProponents', type: :system do
       expect(page).to have_content("#{form_label(:proponent_form, :district)} #{form_error(:proponent_form, :blank)}")
       expect(page).to have_content("#{form_label(:proponent_form, :city)} #{form_error(:proponent_form, :blank)}")
       expect(page).to have_content("#{form_label(:proponent_form, :state)} #{form_error(:proponent_form, :blank)}")
+      expect(page).to have_content(t('activemodel.errors.models.proponent_form.attributes.phones.blank'))
     end
   end
 end

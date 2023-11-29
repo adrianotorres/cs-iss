@@ -22,7 +22,11 @@ class ProponentPresenter
   end
 
   def salary
-    @proponent.salary
+    @proponent.salary.to_s.sub('.', ',')
+  end
+
+  def inss
+    @proponent.inss.to_s.sub('.', ',')
   end
 
   def street
