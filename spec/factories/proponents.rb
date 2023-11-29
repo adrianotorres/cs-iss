@@ -15,4 +15,10 @@ FactoryBot.define do
       phones { [build(:personal_phone), build(:reference_phone)] }
     end
   end
+
+  factory :proponent_presenter do
+    association :proponent
+
+    initialize_with { new(proponent) }
+  end
 end

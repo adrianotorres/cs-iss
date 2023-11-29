@@ -10,7 +10,7 @@
 class ProponentForm
   include ActiveModel::Model
 
-  attr_accessor :name, :cpf, :birthday, :salary, :street, :number, :district, :city, :state, :zip_code, :phones
+  attr_accessor :name, :cpf, :birthday, :salary, :street, :number, :district, :city, :state, :zip_code, :phones, :inss
 
   validates :name, :cpf, :salary, :street, :number, :district, :city, :state, presence: true
   validate :valid_cpf
@@ -27,6 +27,7 @@ class ProponentForm
       cpf:,
       birthday:,
       salary:,
+      inss: inss.sub(',', '.').to_f,
       phones: build_phones,
       address: build_address
     }
