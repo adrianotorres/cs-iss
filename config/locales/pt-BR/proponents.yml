@@ -22,6 +22,7 @@ pt-BR:
         edit: Editar
         delete: Apagar
         create: Crie um novo Proponente
+        dashboard: Visualizar Dashboard
     messages:
       create_successfully: Proponente criado com sucesso
   activemodel:
