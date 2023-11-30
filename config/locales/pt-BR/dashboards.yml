@@ -1,0 +1,12 @@
+pt-BR:
+  dashboards:
+    index:
+      title: Dashboard de Proponentes
+      buttons:
+        proponents: Visualizar Proponentes
+      salary_ranges:
+        one: Até R$ 1.045,00
+        two: De R$ 1.045,01 a R$ 2.089,60
+        three: De R$ 2.089,61 até R$ 3.134,40
+        four: De R$ 3.134,41 até R$ 6.101,06
+        five: Acima De R$ 6.101,06

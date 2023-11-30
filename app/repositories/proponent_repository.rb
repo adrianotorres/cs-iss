@@ -18,4 +18,26 @@ class ProponentRepository
   def fecth_paginated(page: 1, per: 5)
     Proponent.page(page).per(per)
   end
+
+  def grouped_by_salary_range
+    Proponent.all.reduce({
+                           one: 0,
+                           two: 0,
+                           three: 0,
+                           four: 0,
+                           five: 0
+                         }) do |grouped, proponent|
+      if proponent.salary <= 1045
+        grouped.tap {|g| g[:one] += 1 }
+      elsif proponent.salary <= 2089.6
+        grouped.tap {|g| g[:two] += 1 }
+      elsif proponent.salary <= 3134.4
+        grouped.tap {|g| g[:three] += 1 }
+      elsif proponent.salary <= 6101.06
+        grouped.tap {|g| g[:four] += 1 }
+      else
+        grouped.tap {|g| g[:five] += 1 }
+      end
+    end
+  end
 end
