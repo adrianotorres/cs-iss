@@ -9,6 +9,6 @@ class InssController < ApplicationController
     inss_calculator = InssCalculator.new(salary)
     discount = inss_calculator.calculate_discount
 
-    render json: { discount: }
+    render json: {discount:}
   end
 end

@@ -36,25 +36,25 @@ class ProponentsController < ApplicationController
     @proponent_presenter = ProponentPresenter.new(Proponent.find(params[:id]))
   end
 
-  private
-
-  def proponent_repository
+  private def proponent_repository
     @proponent_repository ||= ProponentRepository.new
   end
 
-  def proponent_form_attributes
-    { birthday: build_birthday }.merge proponent_form_params.except('birthday(1i)', 'birthday(2i)', 'birthday(3i)')
+  private def proponent_form_attributes
+    {birthday: build_birthday}.merge proponent_form_params.except(
+      "birthday(1i)", "birthday(2i)", "birthday(3i)"
+    )
   end
 
-  def build_birthday
-    year = params[:proponent_form]['birthday(1i)'].to_i
-    month = params[:proponent_form]['birthday(2i)'].to_i
-    day = params[:proponent_form]['birthday(3i)'].to_i
+  private def build_birthday
+    year = params[:proponent_form]["birthday(1i)"].to_i
+    month = params[:proponent_form]["birthday(2i)"].to_i
+    day = params[:proponent_form]["birthday(3i)"].to_i
 
     Date.new(year, month, day)
   end
 
-  def proponent_form_params
+  private def proponent_form_params
     params.require(:proponent_form).permit(
       :name, :cpf, :birthday, :salary, :inss,
       :street, :number, :district, :city, :state, :zip_code,
@@ -62,17 +62,18 @@ class ProponentsController < ApplicationController
     )
   end
 
-  def create_proponent
+  private def create_proponent
     proponent = Proponent.create(@proponent_form.as_proponent)
 
     if proponent.save
-      redirect_to proponent_path(proponent), notice: 'Proponente criado com sucesso.'
+      redirect_to proponent_path(proponent),
+                  notice: "Proponente criado com sucesso."
     else
       handle_proponent_creation_error(proponent)
     end
   end
 
-  def handle_proponent_creation_error(proponent)
+  private def handle_proponent_creation_error(proponent)
     @proponent_form.errors.merge!(proponent.errors)
     render :new
   end

@@ -15,15 +15,15 @@
     name: "João da Silva - #{n}",
     salary:,
     inss: InssCalculator.new(salary).calculate_discount,
-    birthday: Date.today - rand(18 * 365..90 * 365),
+    birthday: Time.zone.today - rand(18 * 365..90 * 365),
     cpf:,
     address: Address.new(
-      street: 'Franciso Sá',
+      street: "Franciso Sá",
       number: (n.positive? ? n * 100 : 100) + n,
-      district: 'Bairro Wellery',
-      city: 'Fortaleza',
-      state: 'Ceará',
-      zip_code: '61500-000'
+      district: "Bairro Wellery",
+      city: "Fortaleza",
+      state: "Ceará",
+      zip_code: "61500-000"
     ),
     phones: [
       Phone.new(
