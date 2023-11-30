@@ -10,14 +10,16 @@
 class ProponentForm
   include ActiveModel::Model
 
-  attr_accessor :name, :cpf, :birthday, :salary, :street, :number, :district, :city, :state, :zip_code, :phones, :inss
+  attr_accessor :name, :cpf, :birthday, :salary, :street, :number, :district,
+                :city, :state, :zip_code, :phones, :inss
 
-  validates :name, :cpf, :salary, :street, :number, :district, :city, :state, presence: true
+  validates :name, :cpf, :salary, :street, :number, :district, :city, :state,
+            presence: true
   validate :valid_cpf
   validate :valid_phones
 
   def initialize(attrs = {})
-    @birthday = Date.today.year - 18
+    @birthday = Time.zone.today.year - 18
     super(attrs)
   end
 
@@ -27,27 +29,27 @@ class ProponentForm
       cpf:,
       birthday:,
       salary:,
-      inss: inss.sub(',', '.').to_f,
+      inss: inss.sub(",", ".").to_f,
       phones: build_phones,
       address: build_address
     }
   end
 
-  private
-
-  def valid_cpf
+  private def valid_cpf
     return if cpf.blank? || CPF.valid?(cpf)
 
-    errors.add(:cpf, I18n.t('activemodel.errors.models.proponent_form.attributes.cpf.invalid'))
+    errors.add(:cpf,
+               I18n.t("activemodel.errors.models.proponent_form.attributes.cpf.invalid"))
   end
 
-  def valid_phones
-    return if phones.all? { |_k, v| v.present? }
+  private def valid_phones
+    return if phones.all? {|_k, v| v.present? }
 
-    errors.add(:phones, I18n.t('activemodel.errors.models.proponent_form.attributes.phones.blank'))
+    errors.add(:phones,
+               I18n.t("activemodel.errors.models.proponent_form.attributes.phones.blank"))
   end
 
-  def build_address
+  private def build_address
     Address.new(
       street:,
       number:,
@@ -58,7 +60,7 @@ class ProponentForm
     )
   end
 
-  def build_phones
+  private def build_phones
     # phones.map { |_k, v| Phone.new(v) }
     [Phone.new(phones)]
   end

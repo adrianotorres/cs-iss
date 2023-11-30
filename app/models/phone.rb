@@ -19,7 +19,7 @@
 class Phone < ApplicationRecord
   belongs_to :proponent
 
-  enum phone_type: { personal: 0, reference: 1 }
+  enum phone_type: {personal: 0, reference: 1}
 
   validates :area_code, :number, :phone_type, presence: true
 end

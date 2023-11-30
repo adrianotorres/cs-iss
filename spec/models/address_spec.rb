@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Address, type: :model do
-  describe 'relations' do
+  describe "relations" do
     it { should belong_to(:proponent) }
   end
 
-  describe 'validations' do
+  describe "validations" do
     it { should validate_presence_of(:street) }
     it { should validate_presence_of(:number) }
     it { should validate_presence_of(:district) }
