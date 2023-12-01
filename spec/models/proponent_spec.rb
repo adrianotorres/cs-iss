@@ -17,16 +17,16 @@ RSpec.describe Proponent, type: :model do
   end
 
   describe "scopes" do
-    describe "with_cpf" do
+    describe "by_cpf" do
       let!(:proponent) { create(:proponent, cpf: "12345678900") }
 
       it "should return proponent with the specified cpf" do
-        result = Proponent.with_cpf("12345678900")
+        result = Proponent.by_cpf("12345678900")
         expect(result).to include(proponent)
       end
 
       it "should not return proponent with different cpf" do
-        result = Proponent.with_cpf("98765432100")
+        result = Proponent.by_cpf("98765432100")
         expect(result).not_to include(proponent)
       end
     end

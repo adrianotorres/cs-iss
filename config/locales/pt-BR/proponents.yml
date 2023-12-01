@@ -32,6 +32,7 @@ pt-BR:
         cpf: CPF
         birthday: Data de Nascimento
         salary: Salário
+        salary_liquid: Salário Líquido
         inss: INSS
         street: Rua
         number: Número
@@ -40,13 +41,13 @@ pt-BR:
         state: Estado
         zip_code: CEP
         phones:
+          one: Telefone
           area_code: DDD
           number: Telefone
           type: Tipo de contato
     errors:
       models:
         proponent_form:
-          blank: não pode ficar em branco!
           attributes:
             cpf:
               invalid: não é válido!

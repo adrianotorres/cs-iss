@@ -24,9 +24,10 @@ class ProponentsController < ApplicationController
 
   def create
     @proponent_form = ProponentForm.new(proponent_form_attributes)
+    create_proponent_response = CreateProponent.new(@proponent_form).create
 
-    if @proponent_form.valid?
-      create_proponent
+    if @proponent_form.valid? && create_proponent_response[:status] == :success
+      redirect_to proponent_path(create_proponent_response[:proponent]), notice: "Proponente criado com sucesso."
     else
       render :new
     end
@@ -60,21 +61,5 @@ class ProponentsController < ApplicationController
       :street, :number, :district, :city, :state, :zip_code,
       phones: %i[area_code number phone_type]
     )
-  end
-
-  private def create_proponent
-    proponent = Proponent.create(@proponent_form.as_proponent)
-
-    if proponent.save
-      redirect_to proponent_path(proponent),
-                  notice: "Proponente criado com sucesso."
-    else
-      handle_proponent_creation_error(proponent)
-    end
-  end
-
-  private def handle_proponent_creation_error(proponent)
-    @proponent_form.errors.merge!(proponent.errors)
-    render :new
   end
 end

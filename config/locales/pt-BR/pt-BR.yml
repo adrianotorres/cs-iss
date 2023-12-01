@@ -1,8 +1,9 @@
 pt-BR:
-  activerecord:
-    errors:
-      messages:
-        taken: 'já casdastrado!'
+  errors:
+    messages:
+      taken: já casdastrado!
+      blank: não pode ficar em branco!
+      invalid: inválido!
   date:
     formats:
       default: "%d/%m/%Y"

@@ -12,6 +12,7 @@
       <p><strong><%= t('activemodel.attributes.proponent_form.birthday')%>:</strong> <%= I18n.l(@proponent_presenter.birthday) %></p>
       <p><strong><%= t('activemodel.attributes.proponent_form.salary')%>:</strong> <span data-proponent-presenter-target="salary"><%= @proponent_presenter.salary %></span></span></p>
       <p><strong><%= t('activemodel.attributes.proponent_form.inss')%>:</strong> <span data-proponent-presenter-target="inss"><%= @proponent_presenter.inss %></span></span></p>
+      <p><strong><%= t('activemodel.attributes.proponent_form.salary_liquid')%>:</strong> <span data-proponent-presenter-target="salaryLiquid"><%= @proponent_presenter.salary_liquid %></span></span></p>
     </div>
 
     <% if @proponent_presenter.street.present? %>

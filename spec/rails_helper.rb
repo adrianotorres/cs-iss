@@ -69,4 +69,6 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include I18nTestHelpers
   config.include FormatCurrency
+
+  ActiveJob::Base.queue_adapter = :test
 end

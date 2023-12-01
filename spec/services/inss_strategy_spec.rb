@@ -2,7 +2,6 @@
 
 require_relative "../../app/services/inss_strategy"
 
-# rubocop:disable Metrics
 RSpec.describe InssStrategy, type: :model do
   describe "#calculate_discount" do
     it "should be able to calculate discount for the given salary within the strategy range" do
@@ -43,4 +42,3 @@ RSpec.describe InssStrategy, type: :model do
     end
   end
 end
-# rubocop:enable Metrics

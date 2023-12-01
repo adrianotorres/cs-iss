@@ -29,7 +29,7 @@ class ProponentForm
       cpf:,
       birthday:,
       salary:,
-      inss: inss.sub(",", ".").to_f,
+      inss: inss ? inss.sub(",", ".").to_f : 0,
       phones: build_phones,
       address: build_address
     }
