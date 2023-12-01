@@ -11,12 +11,11 @@ class ProponentForm
   include ActiveModel::Model
 
   attr_accessor :name, :cpf, :birthday, :salary, :street, :number, :district,
-                :city, :state, :zip_code, :phones, :inss, :id
+                :city, :state, :zip_code, :personal, :reference, :inss, :id
 
-  validates :name, :cpf, :salary, :street, :number, :district, :city, :state,
-            presence: true
+  validates :name, :cpf, :salary, :street, :number, :district, :city, :state, presence: true
   validate :valid_cpf
-  # validate :valid_phones
+  validate :valid_phones
 
   def initialize(attrs = {})
     @birthday = Time.zone.today.year - 18 unless attrs[:birthday]
@@ -31,8 +30,8 @@ class ProponentForm
       birthday:,
       salary:,
       inss: inss ? inss.to_s.sub(",", ".").to_f : 0,
-      # phones: build_phones,
-      address: build_address
+      phones_attributes:,
+      address:
     }
   end
 
@@ -44,7 +43,7 @@ class ProponentForm
           birthday: proponent.birthday,
           salary: proponent.salary,
           inss: proponent.inss.to_s.sub(".", ","),
-          phones: [proponent.phones.map(&:attributes)],
+          personal: proponent.phones.personal.first&.attributes,
           street: proponent.address&.street,
           number: proponent.address&.number,
           district: proponent.address&.district,
@@ -57,18 +56,20 @@ class ProponentForm
   private def valid_cpf
     return if cpf.blank? || CPF.valid?(cpf)
 
-    errors.add(:cpf,
-               I18n.t("activemodel.errors.models.proponent_form.attributes.cpf.invalid"))
+    errors.add(:cpf, I18n.t("activemodel.errors.models.proponent_form.attributes.cpf.invalid"))
   end
 
   private def valid_phones
-    return if phones.all? {|_k, v| v.present? }
+    return if phones.any? {|phone| valid_phone(phone) }
 
-    errors.add(:phones,
-               I18n.t("activemodel.errors.models.proponent_form.attributes.phones.blank"))
+    errors.add(:phones, I18n.t("activemodel.errors.models.proponent_form.attributes.phones.blank"))
   end
 
-  private def build_address
+  private def valid_phone(phone)
+    phone.area_code.present? && phone.number.present? && phone.phone_type.present?
+  end
+
+  private def address
     Address.new(
       street:,
       number:,
@@ -79,8 +80,13 @@ class ProponentForm
     )
   end
 
-  private def build_phones
-    # phones.map { |_k, v| Phone.new(v) }
-    [Phone.new(phones)]
+  private def phones_attributes
+    phones.each_with_index.each_with_object({}) do |(phone, index), phone_attrs|
+      phone_attrs[index.to_s] = phone.attributes.slice("area_code", "number", "phone_type")
+      phone_attrs
+    end
+  end
+  private def phones
+    [Phone.new(personal), Phone.new(reference)].select {|phone| valid_phone(phone) }
   end
 end

@@ -1,0 +1,13 @@
+<%= form.fields_for type, Phone.new(value) do |phone_form| %>
+  <div class="row form-group">
+    <div class="col-md-2">
+      <%= phone_form.input :area_code %>
+    </div>
+    <div class="col-md-4">
+      <%= phone_form.input :number %>
+    </div>
+    <div class="col-md-4">
+      <%= phone_form.input :phone_type, as: :select, collection: Phone.phone_types.keys.map { |phone_type| [t("activerecord.attributes.phone.phone_types.#{phone_type}"), phone_type] }, include_blank: false, selected: type %>
+    </div>
+  </div>
+<% end %>

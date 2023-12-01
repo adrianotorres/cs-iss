@@ -89,7 +89,8 @@ class ProponentsController < ApplicationController
     params.require(:proponent_form).permit(
       :id, :name, :cpf, :birthday, :salary, :inss,
       :street, :number, :district, :city, :state, :zip_code,
-      phones: %i[area_code number phone_type]
+      personal: %i[area_code number phone_type],
+      reference: %i[area_code number phone_type]
     )
   end
 end
