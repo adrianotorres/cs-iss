@@ -27,7 +27,7 @@ RSpec.describe "CreateProponents", type: :system do
       build(:proponent_presenter, proponent: Proponent.last)
     end
 
-    it "should be able to create a new proponent" do
+    it "should be able to create a new proponent and visualize its data" do
       visit new_proponent_path
 
       # Filling the poponent's data
@@ -98,41 +98,15 @@ RSpec.describe "CreateProponents", type: :system do
 
       click_button t("proponents.new.buttons.create")
 
-      expect(page).to have_content("#{form_label(:proponent_form,
-                                                 :name)} #{form_error(
-                                                   :proponent_form, :blank
-                                                 )}")
-      expect(page).to have_content("#{form_label(:proponent_form,
-                                                 :cpf)} #{form_error(
-                                                   :proponent_form, :blank
-                                                 )}")
-      expect(page).to have_content("#{form_label(:proponent_form,
-                                                 :salary)} #{form_error(
-                                                   :proponent_form, :blank
-                                                 )}")
-      expect(page).to have_content("#{form_label(:proponent_form,
-                                                 :street)} #{form_error(
-                                                   :proponent_form, :blank
-                                                 )}")
-      expect(page).to have_content("#{form_label(:proponent_form,
-                                                 :number)} #{form_error(
-                                                   :proponent_form, :blank
-                                                 )}")
-      expect(page).to have_content("#{form_label(:proponent_form,
-                                                 :district)} #{form_error(
-                                                   :proponent_form, :blank
-                                                 )}")
-      expect(page).to have_content("#{form_label(:proponent_form,
-                                                 :city)} #{form_error(
-                                                   :proponent_form, :blank
-                                                 )}")
-      expect(page).to have_content("#{form_label(:proponent_form,
-                                                 :state)} #{form_error(
-                                                   :proponent_form, :blank
-                                                 )}")
-      expect(page).to have_content(
-        t("activemodel.errors.models.proponent_form.attributes.phones.blank")
-      )
+      expect(page).to have_content("#{form_label(:proponent_form, :name)} #{t('errors.messages.blank')}")
+      expect(page).to have_content("#{form_label(:proponent_form, :cpf)} #{t('errors.messages.blank')}")
+      expect(page).to have_content("#{form_label(:proponent_form, :salary)} #{t('errors.messages.blank')}")
+      expect(page).to have_content("#{form_label(:proponent_form, :street)} #{t('errors.messages.blank')}")
+      expect(page).to have_content("#{form_label(:proponent_form, :number)} #{t('errors.messages.blank')}")
+      expect(page).to have_content("#{form_label(:proponent_form, :district)} #{t('errors.messages.blank')}")
+      expect(page).to have_content("#{form_label(:proponent_form, :city)} #{t('errors.messages.blank')}")
+      expect(page).to have_content("#{form_label(:proponent_form, :state)} #{t('errors.messages.blank')}")
+      expect(page).to have_content(t("activemodel.errors.models.proponent_form.attributes.phones.blank"))
     end
   end
 end

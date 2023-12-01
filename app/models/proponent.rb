@@ -11,6 +11,7 @@
 # - `cpf`: The CPF (unique) of the proponent.
 # - `birthday`: The birthday of the proponent.
 # - `salary`: The salary of the proponent.
+# - `salary_liquid`: The salary liquid of the proponent.
 # - `address`: The address(Address model) of the proponent.
 #
 # Usage Example:
@@ -23,6 +24,7 @@
 # - `cpf`: Must be unique and present.
 # - `birthday`: Must be a valid date.
 # - `salary`: Can be a decimal number.
+# - `salary liquid`: Can be a decimal number.
 #
 class Proponent < ApplicationRecord
   has_one :address, dependent: :destroy
@@ -30,10 +32,11 @@ class Proponent < ApplicationRecord
 
   encrypts :cpf, deterministic: true
   encrypts :salary, deterministic: true
+  encrypts :salary_liquid, deterministic: true
 
   validates :name, presence: true
   validates :cpf, presence: true, uniqueness: true
   validates :salary, presence: true
 
-  scope :with_cpf, ->(cpf) { where cpf: }
+  scope :by_cpf, ->(cpf) { where cpf: }
 end

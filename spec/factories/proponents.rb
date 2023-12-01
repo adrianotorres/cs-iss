@@ -21,4 +21,12 @@ FactoryBot.define do
 
     initialize_with { new(proponent) }
   end
+
+  factory :proponent_form do
+    name { Faker::Name.name }
+    cpf { CPF.generate }
+    birthday { Faker::Date.birthday(min_age: 18, max_age: 65) }
+    salary { rand(90_000..850_000) / 100.0 }
+    phones { build(:personal_phone).attributes }
+  end
 end

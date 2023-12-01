@@ -25,6 +25,10 @@ class ProponentPresenter
     @proponent.salary.to_s.sub(".", ",")
   end
 
+  def salary_liquid
+    @proponent.salary_liquid.to_s.sub(".", ",")
+  end
+
   def inss
     @proponent.inss.to_s.sub(".", ",")
   end
