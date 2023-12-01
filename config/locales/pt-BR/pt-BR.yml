@@ -4,6 +4,7 @@ pt-BR:
       taken: já casdastrado!
       blank: não pode ficar em branco!
       invalid: inválido!
+      confirmation: diferente da senha
   date:
     formats:
       default: "%d/%m/%Y"

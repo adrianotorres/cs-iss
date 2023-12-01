@@ -3,7 +3,10 @@
 require "rails_helper"
 
 RSpec.describe "Dashboard", type: :system do
+  let(:user) { create(:user) }
+
   before do
+    sign_in user
     driven_by :selenium, using: :headless_chrome, screen_size: [1400, 1400]
   end
 

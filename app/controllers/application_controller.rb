@@ -14,6 +14,8 @@
 # documentation: https://api.rubyonrails.org/classes/ActionController/Base.html
 #
 class ApplicationController < ActionController::Base
+  before_action :authenticate_user!
+
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
   private def render_not_found

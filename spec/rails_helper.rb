@@ -69,6 +69,7 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include I18nTestHelpers
   config.include FormatCurrency
+  config.include Devise::Test::IntegrationHelpers
 
   ActiveJob::Base.queue_adapter = :test
 end
