@@ -38,5 +38,7 @@ class Proponent < ApplicationRecord
   validates :cpf, presence: true, uniqueness: true
   validates :salary, presence: true
 
+  accepts_nested_attributes_for :phones
+
   scope :by_cpf, ->(cpf) { where cpf: }
 end

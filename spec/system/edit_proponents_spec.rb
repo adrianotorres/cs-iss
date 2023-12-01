@@ -25,7 +25,7 @@ RSpec.describe "EditProponents", type: :system do
       expect(page).to have_field(form_label(:proponent_form, :name), with: proponent.name)
       expect(page).to have_field(form_label(:proponent_form, :street), with: proponent.address.street)
       expect(page).to have_field(form_label(:proponent_form, :street), with: proponent.address.street)
-      # expect(page).to have_field(model_label(:phone, :number), with: proponent.phones.first.number)
+      expect(page).to have_field(model_label(:phone, :number), with: proponent.phones.first.number)
     end
   end
 

@@ -46,28 +46,11 @@
     </div>
   </div>
   <div class="row mb-3">
-    <div id="phones-container" data-controller="phone-form" data-target="phone-form">
-      <!-- <%= form.fields_for :phones, [proponent_form.phones&.first&.first ? Phone.new(proponent_form.phones.first.first) : Phone.new], child_index: Time.now.to_i do |phone_form| %>
-        <div class="row phone-row form-group" data-phone-form-target="phoneRow">
-          <div class="col-md-2">
-            <%= phone_form.input :area_code %>
-          </div>
-          <div class="col-md-4">
-            <%= phone_form.input :number %>
-          </div>
-          <div class="col-md-4">
-            <%= phone_form.input :phone_type, as: :select, collection: Phone.phone_types.keys.map { |type| [t("activerecord.attributes.phone.phone_types.#{type}"), type] }, include_blank: false %>
-          </div>
-          <div class="col-md-2">
-            <button data-action="click->phone-form#addPhone" type="button" class="btn btn-success add-phone-btn">+</button>
-            <button data-action="click->phone-form#removePhone" type="button" class="btn btn-danger remove-phone-btn d-none">-</button>
-          </div>
-        </div>
-      <% end %> -->
-      <!-- <% if proponent_form.errors[:phones].present? %>
-        <p class="text-danger"><%= proponent_form.errors[:phones].first %></p>
-      <% end %> -->
-    </div>
+    <%= render 'phone_form', form: form, type: :personal, value: proponent_form.personal %>
+    <%= render 'phone_form', form: form, type: :reference, value: proponent_form.reference %>
+    <% if proponent_form.errors[:phones].present? %>
+      <p class="text-danger"><%= proponent_form.errors[:phones].first %></p>
+    <% end %>
   </div>
   <div class="row mb-3">
     <div class="col-md-6">

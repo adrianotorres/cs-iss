@@ -49,16 +49,14 @@ RSpec.describe "CreateProponents", type: :system do
       fill_in form_label(:proponent_form, :state), with: address.state
 
       # Filling the poponent's personal phone
-      # fill_in model_label(:phone, :area_code), with: personal_phone.area_code
-      # fill_in model_label(:phone, :number), with: personal_phone.number
-      # select model_label(:phone, "phone_types.personal"),
-      #        from: "proponent_form_phones_phone_type"
+      fill_in "proponent_form_personal_area_code", with: personal_phone.area_code
+      fill_in "proponent_form_personal_number", with: personal_phone.number
+      select model_label(:phone, "phone_types.personal"), from: "proponent_form_personal_phone_type"
 
       # Filling the poponent's reference phone
-      # fill_in model_label(:phone, :area_code), with: reference_phone.area_code
-      # fill_in model_label(:phone, :number), with: reference_phone.number
-      # select model_label(:phone, "phone_types.reference"),
-      #        from: "proponent_form_phones_phone_type"
+      fill_in "proponent_form_reference_area_code", with: reference_phone.area_code
+      fill_in "proponent_form_reference_number", with: reference_phone.number
+      select model_label(:phone, "phone_types.reference"), from: "proponent_form_reference_phone_type"
 
       click_button t("proponents.new.buttons.submit")
 
@@ -73,14 +71,8 @@ RSpec.describe "CreateProponents", type: :system do
         "#{format_currency(proponent_presenter.inss)}")
       expect(page).to have_content("#{form_label(:proponent_form, :street)}: "\
         "#{proponent_presenter.street}")
-      # expect(page).to have_content("#{model_label(:phone, :number)}:
-      # {personal_phone.number}")
-      # expect(page).to have_content(
-      #   "#{model_label(
-      #     :phone,
-      #     :number
-      #   )}: #{proponent_presenter.phones.first.number}"
-      # )
+      expect(page).to have_content("#{model_label(:phone, :number)}: #{personal_phone.number}")
+      expect(page).to have_content("#{model_label(:phone, :number)}: #{reference_phone.number}")
     end
 
     it "should not be able to create a new proponent with an invalid cpf" do
@@ -109,7 +101,7 @@ RSpec.describe "CreateProponents", type: :system do
       expect(page).to have_content("#{form_label(:proponent_form, :district)} #{t('errors.messages.blank')}")
       expect(page).to have_content("#{form_label(:proponent_form, :city)} #{t('errors.messages.blank')}")
       expect(page).to have_content("#{form_label(:proponent_form, :state)} #{t('errors.messages.blank')}")
-      # expect(page).to have_content(t("activemodel.errors.models.proponent_form.attributes.phones.blank"))
+      expect(page).to have_content(t("activemodel.errors.models.proponent_form.attributes.phones.blank"))
     end
   end
 end
