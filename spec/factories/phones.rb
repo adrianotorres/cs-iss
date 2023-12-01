@@ -4,6 +4,7 @@ FactoryBot.define do
   factory :phone do
     area_code { Faker::PhoneNumber.area_code }
     number { Faker::PhoneNumber.cell_phone }
+    proponent
   end
 
   factory :personal_phone, parent: :phone do

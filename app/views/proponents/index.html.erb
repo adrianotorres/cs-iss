@@ -18,9 +18,9 @@
           <% @proponent_list.items.each do |proponent| %>
             <tr class="record">
               <td class="text-center"><%= proponent.name %> </td>
-              <td class="text-center"><%= button_to t('.buttons.show'), proponent_path(proponent), method: :get, class:"border-0 rounded-pill shadow px-3 py-2" %></td>
-              <td class="text-center"><%= button_to t('.buttons.edit'), edit_proponent_path(proponent), method: :get, class:"border-0 rounded-pill shadow px-3 py-2" %></td>
-              <td class="text-center"><%= button_to t('.buttons.delete'), proponent, method: :delete, class:"border-0 rounded-pill shadow px-3 py-2" %></td>
+              <td class="text-center"><%= button_to t('.table.buttons.show'), proponent_path(proponent), method: :get, class:"border-0 rounded-pill shadow px-3 py-2" %></td>
+              <td class="text-center"><%= button_to t('.table.buttons.edit'), edit_proponent_path(proponent), method: :get, class:"border-0 rounded-pill shadow px-3 py-2" %></td>
+              <td class="text-center"><%= button_to t('.table.buttons.delete'), proponent, method: :delete, class:"border-0 rounded-pill shadow px-3 py-2" %></td>
             </tr>
           <% end %>
         <% else %>

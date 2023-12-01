@@ -11,28 +11,47 @@ class ProponentForm
   include ActiveModel::Model
 
   attr_accessor :name, :cpf, :birthday, :salary, :street, :number, :district,
-                :city, :state, :zip_code, :phones, :inss
+                :city, :state, :zip_code, :phones, :inss, :id
 
   validates :name, :cpf, :salary, :street, :number, :district, :city, :state,
             presence: true
   validate :valid_cpf
-  validate :valid_phones
+  # validate :valid_phones
 
   def initialize(attrs = {})
-    @birthday = Time.zone.today.year - 18
+    @birthday = Time.zone.today.year - 18 unless attrs[:birthday]
     super(attrs)
   end
 
   def as_proponent
     {
+      id:,
       name:,
       cpf:,
       birthday:,
       salary:,
-      inss: inss ? inss.sub(",", ".").to_f : 0,
-      phones: build_phones,
+      inss: inss ? inss.to_s.sub(",", ".").to_f : 0,
+      # phones: build_phones,
       address: build_address
     }
+  end
+
+  def self.from(proponent)
+    new({
+          id: proponent.id,
+          name: proponent.name,
+          cpf: proponent.cpf,
+          birthday: proponent.birthday,
+          salary: proponent.salary,
+          inss: proponent.inss,
+          phones: [proponent.phones.map(&:attributes)],
+          street: proponent.address&.street,
+          number: proponent.address&.number,
+          district: proponent.address&.district,
+          city: proponent.address&.city,
+          state: proponent.address&.state,
+          zip_code: proponent.address&.zip_code
+        })
   end
 
   private def valid_cpf

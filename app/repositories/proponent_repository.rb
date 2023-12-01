@@ -19,6 +19,18 @@ class ProponentRepository
     Proponent.page(page).per(per)
   end
 
+  def find(id)
+    Proponent.find(id)
+  end
+
+  def create(attributes)
+    Proponent.create(attributes)
+  end
+
+  def update(attributes)
+    find(attributes[:id]).update(attributes)
+  end
+
   def grouped_by_salary_range
     Proponent.all.reduce({
                            one: 0,
