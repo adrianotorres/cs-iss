@@ -32,11 +32,6 @@ RSpec.describe "EditProponents", type: :system do
   context "update" do
     let(:proponent) { build(:proponent, :with_address, :with_phones) }
     let(:address) { proponent.address }
-    let(:personal_phone) { proponent.phones.find(&:personal?) }
-    let(:reference_phone) { proponent.phones.find(&:reference?) }
-    let(:proponent_presenter) do
-      build(:proponent_presenter, proponent: Proponent.last)
-    end
 
     it "should be able to update a proponent and visualize the alteration" do
       visit edit_proponent_path(proponent.id)
@@ -51,21 +46,15 @@ RSpec.describe "EditProponents", type: :system do
     end
   end
 
-  # context "validation" do
-  #   it "should be able to validate required fields" do
-  #     visit new_proponent_path
+  context "validation" do
+    it "should be able to validate required fields" do
+      visit edit_proponent_path(proponent.id)
 
-  #     click_button t("proponents.new.buttons.create")
+      fill_in form_label(:proponent_form, :name), with: ""
 
-  #     expect(page).to have_content("#{form_label(:proponent_form, :name)} #{t('errors.messages.blank')}")
-  #     expect(page).to have_content("#{form_label(:proponent_form, :cpf)} #{t('errors.messages.blank')}")
-  #     expect(page).to have_content("#{form_label(:proponent_form, :salary)} #{t('errors.messages.blank')}")
-  #     expect(page).to have_content("#{form_label(:proponent_form, :street)} #{t('errors.messages.blank')}")
-  #     expect(page).to have_content("#{form_label(:proponent_form, :number)} #{t('errors.messages.blank')}")
-  #     expect(page).to have_content("#{form_label(:proponent_form, :district)} #{t('errors.messages.blank')}")
-  #     expect(page).to have_content("#{form_label(:proponent_form, :city)} #{t('errors.messages.blank')}")
-  #     expect(page).to have_content("#{form_label(:proponent_form, :state)} #{t('errors.messages.blank')}")
-  #     expect(page).to have_content(t("activemodel.errors.models.proponent_form.attributes.phones.blank"))
-  #   end
-  # end
+      click_button t("proponents.edit.buttons.submit")
+
+      expect(page).to have_content("#{form_label(:proponent_form, :name)} #{t('errors.messages.blank')}")
+    end
+  end
 end

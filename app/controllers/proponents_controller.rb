@@ -10,8 +10,8 @@
 # - `new`: Render a form for creating a new proponent.
 # - `create`: Create a new proponent based on form submissions.
 # - `edit`: Render a form for editing an existing proponent.
-# - TODO `update`: Update an existing proponent based on form submissions.
-# - TODO `destroy`: Delete a proponent.
+# - `update`: Update an existing proponent based on form submissions.
+# - `destroy`: destroy a proponent.
 #
 class ProponentsController < ApplicationController
   def index
@@ -51,6 +51,16 @@ class ProponentsController < ApplicationController
 
   def show
     @proponent_presenter = ProponentPresenter.new(proponent)
+  end
+
+  def destroy
+    destroy_proponent_response = DestroyProponent.new(params[:id]).destroy
+
+    if destroy_proponent_response[:status] == :success
+      redirect_to proponents_path, notice: t("proponents.messages.destroy_successfully")
+    else
+      redirect_to proponents_path, notice: t("proponents.messages.destroy_failure")
+    end
   end
 
   private def proponent_repository

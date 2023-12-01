@@ -31,6 +31,10 @@ class ProponentRepository
     find(attributes[:id]).update(attributes)
   end
 
+  def destroy(id)
+    find(id).destroy
+  end
+
   def grouped_by_salary_range
     Proponent.all.reduce({
                            one: 0,
