@@ -43,7 +43,7 @@ class ProponentForm
           cpf: proponent.cpf,
           birthday: proponent.birthday,
           salary: proponent.salary,
-          inss: proponent.inss,
+          inss: proponent.inss.to_s.sub(".", ","),
           phones: [proponent.phones.map(&:attributes)],
           street: proponent.address&.street,
           number: proponent.address&.number,

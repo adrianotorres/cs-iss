@@ -15,6 +15,5 @@ Rails.application.routes.draw do
   resources :proponents
   resources :dashboards, only: [:index]
 
-  # Defines the root path route ("/")
-  root "proponents#index"
+  root "dashboards#index"
 end

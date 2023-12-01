@@ -5,6 +5,7 @@ import { Application } from "@hotwired/stimulus"
 import { PhoneForm } from "./phoneForm"
 import { ProponentFormController } from "./proponents/form"
 import { ProponentPresenterController } from "./proponents/presenter"
+import { ProponentListController } from "./proponents/list"
 
 const application = Application.start()
 
@@ -14,6 +15,7 @@ declare const window: Window &
 application.register('phone-form', PhoneForm)
 application.register('proponent-form', ProponentFormController)
 application.register('proponent-presenter', ProponentPresenterController)
+application.register('proponent-list', ProponentListController)
 
 // Configure Stimulus development experience
 application.debug = false
