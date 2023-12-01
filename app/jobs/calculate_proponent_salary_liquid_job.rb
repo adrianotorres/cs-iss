@@ -4,7 +4,7 @@ class CalculateProponentSalaryLiquidJob < ApplicationJob
   queue_as :default
 
   def perform(proponent_id)
-    proponent = Proponent.find(proponent_id)
+    proponent = ProponentRepository.new.find(proponent_id)
     salary_liquid = proponent.salary.to_f - proponent.inss
     proponent.update(salary_liquid:)
   rescue ActiveRecord::RecordNotFound

@@ -8,5 +8,6 @@ FactoryBot.define do
     city { Faker::Address.city }
     state { Faker::Address.state }
     zip_code { Faker::Address.zip_code }
+    proponent
   end
 end

@@ -9,7 +9,7 @@
 # - `show`: Display details of a specific proponent.
 # - `new`: Render a form for creating a new proponent.
 # - `create`: Create a new proponent based on form submissions.
-# - TODO `edit`: Render a form for editing an existing proponent.
+# - `edit`: Render a form for editing an existing proponent.
 # - TODO `update`: Update an existing proponent based on form submissions.
 # - TODO `destroy`: Delete a proponent.
 #
@@ -22,23 +22,43 @@ class ProponentsController < ApplicationController
     @proponent_form = ProponentForm.new
   end
 
+  def edit
+    @proponent_form = ProponentForm.from(proponent)
+  end
+
+  def update
+    @proponent_form = ProponentForm.new(proponent_form_attributes)
+    update_proponent_response = UpdateProponent.new(@proponent_form).update
+
+    if update_proponent_response[:status] == :success
+      redirect_to proponents_path, notice: t("proponents.messages.update_successfully")
+    else
+      render :new
+    end
+  end
+
   def create
     @proponent_form = ProponentForm.new(proponent_form_attributes)
     create_proponent_response = CreateProponent.new(@proponent_form).create
 
-    if @proponent_form.valid? && create_proponent_response[:status] == :success
-      redirect_to proponent_path(create_proponent_response[:proponent]), notice: "Proponente criado com sucesso."
+    if create_proponent_response[:status] == :success
+      redirect_to proponent_path(create_proponent_response[:proponent]),
+                  notice: t("proponents.messages.create_successfully")
     else
       render :new
     end
   end
 
   def show
-    @proponent_presenter = ProponentPresenter.new(Proponent.find(params[:id]))
+    @proponent_presenter = ProponentPresenter.new(proponent)
   end
 
   private def proponent_repository
     @proponent_repository ||= ProponentRepository.new
+  end
+
+  private def proponent
+    @proponent ||= proponent_repository.find(params[:id])
   end
 
   private def proponent_form_attributes
@@ -57,7 +77,7 @@ class ProponentsController < ApplicationController
 
   private def proponent_form_params
     params.require(:proponent_form).permit(
-      :name, :cpf, :birthday, :salary, :inss,
+      :id, :name, :cpf, :birthday, :salary, :inss,
       :street, :number, :district, :city, :state, :zip_code,
       phones: %i[area_code number phone_type]
     )

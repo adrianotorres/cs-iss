@@ -9,7 +9,6 @@ RSpec.describe CreateProponent, type: :model do
 
     it "should be able to create a new proponent" do
       create_proponent = CreateProponent.new(proponent_form)
-
       create_proponent_response = create_proponent.create
 
       expect(Proponent.last).to_not be_nil
