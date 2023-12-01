@@ -40,3 +40,6 @@
   )
   CalculateProponentSalaryLiquidJob.perform_now(proponent.id)
 end
+
+user = User.where(email: "csiss@mail.com").first
+User.new(email: "csiss@mail.com", password: "admincsiss").save unless user

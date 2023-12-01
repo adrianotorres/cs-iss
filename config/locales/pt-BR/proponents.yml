@@ -14,13 +14,16 @@ pt-BR:
         reference_phone: Telefone de Referência
     index:
       title: Proponentes
-      header:
-        name: Nome
-        action: Ações
+      table:
+        empty: Nenhum proponente cadastrado
+        header:
+          name: Nome
+          action: Ações
+        buttons:
+          show: Visualizar
+          edit: Editar
+          delete: Apagar
       buttons:
-        show: Visualizar
-        edit: Editar
-        delete: Apagar
         create: Crie um novo Proponente
         dashboard: Visualizar Dashboard
     messages:
