@@ -36,6 +36,7 @@ pt-BR:
       create_successfully: Proponente criado com sucesso
       update_successfully: Proponente alterado com sucesso
       destroy_successfully: Proponente apagado com sucesso
+      destroy_failure: Proponente já está apagado
   activemodel:
     attributes:
       proponent_form:

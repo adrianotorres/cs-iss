@@ -5,6 +5,9 @@ pt-BR:
       blank: não pode ficar em branco!
       invalid: inválido!
       confirmation: diferente da senha
+  layouts:
+    application:
+      logout: Sair
   date:
     formats:
       default: "%d/%m/%Y"

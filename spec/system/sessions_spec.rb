@@ -3,10 +3,6 @@
 require "rails_helper"
 
 RSpec.describe "User Sessions", type: :system do
-  before do
-    driven_by :selenium, using: :headless_chrome, screen_size: [1400, 1400]
-  end
-
   context "login failed" do
     it "should not be able to log in with noexistent user" do
       visit new_user_session_path

@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :phone do
-    area_code { Faker::PhoneNumber.area_code }
+    area_code { Faker::PhoneNumber.area_code || Faker::Number.number(digits: 3) }
     number { Faker::PhoneNumber.cell_phone }
     proponent
   end

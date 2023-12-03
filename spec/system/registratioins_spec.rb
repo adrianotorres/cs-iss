@@ -3,10 +3,6 @@
 require "rails_helper"
 
 RSpec.describe "Registrations", type: :system do
-  before do
-    driven_by :selenium, using: :headless_chrome, screen_size: [1400, 1400]
-  end
-
   let(:email) { Faker::Internet.email }
   let(:password) { Faker::Internet.password }
 
@@ -24,7 +20,7 @@ RSpec.describe "Registrations", type: :system do
       visit new_user_registration_path
 
       fill_in t("simple_form.labels.user.email"), with: email
-      fill_in t("simple_form.labels.user.password"), with: password
+      fill_in "user_password", with: password
       fill_in t("simple_form.labels.user.password_confirmation"), with: password.reverse
 
       click_button t("devise.registrations.new.buttons.submit")
@@ -38,12 +34,12 @@ RSpec.describe "Registrations", type: :system do
       visit new_user_registration_path
 
       fill_in t("simple_form.labels.user.email"), with: email
-      fill_in t("simple_form.labels.user.password"), with: password
+      fill_in "user_password", with: password
       fill_in t("simple_form.labels.user.password_confirmation"), with: password
 
       click_button t("devise.registrations.new.buttons.submit")
 
-      expect(page).to have_text(t("devise.registrations.user.signed_up"))
+      expect(page).to have_text(t("devise.registrations.signed_up"))
     end
   end
 end

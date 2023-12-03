@@ -3,7 +3,7 @@
 # Mirgation to create proponents table
 class CreateProponents < ActiveRecord::Migration[7.1]
   def change
-    create_table :proponents do |t|
+    create_table :proponents, id: :uuid do |t|
       t.string :name, null: false
       t.jsonb :cpf, null: false
       t.jsonb :salary, null: false

@@ -1,0 +1,10 @@
+en:
+  activerecord:
+    attributes:
+      phone:
+        phone_types:
+          personal: Personal
+          reference: Reference
+        area_code: Area Code
+        number: Number
+        phone_type: Contact Type

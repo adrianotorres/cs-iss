@@ -10,7 +10,6 @@ RSpec.describe "EditProponents", type: :system do
     create(:address, proponent:)
     create(:personal_phone, proponent:)
     sign_in user
-    driven_by :selenium, using: :headless_chrome, screen_size: [1400, 1400]
   end
 
   context "navigation" do
