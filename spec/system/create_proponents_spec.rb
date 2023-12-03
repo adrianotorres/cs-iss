@@ -3,12 +3,7 @@
 require "rails_helper"
 
 RSpec.describe "CreateProponents", type: :system do
-  let(:user) { create(:user) }
-
-  before do
-    sign_in user
-    driven_by :selenium, using: :headless_chrome, screen_size: [1400, 1400]
-  end
+  before { sign_in create(:user) }
 
   context "navigation" do
     it "should be able to navigate to create page from list" do
@@ -37,13 +32,10 @@ RSpec.describe "CreateProponents", type: :system do
       fill_in form_label(:proponent_form, :name), with: proponent.name
       fill_in form_label(:proponent_form, :cpf), with: proponent.cpf
       fill_in form_label(:proponent_form, :salary), with: proponent.salary
-      select "15", from: "proponent_form_birthday_3i"
-      select "Março", from: "proponent_form_birthday_2i"
-      select "1990", from: "proponent_form_birthday_1i"
 
       # Filling the poponent's address data
       fill_in form_label(:proponent_form, :street), with: address.street
-      fill_in form_label(:proponent_form, :number), with: address.number
+      fill_in "proponent_form_number", with: address.number
       fill_in form_label(:proponent_form, :district), with: address.district
       fill_in form_label(:proponent_form, :city), with: address.city
       fill_in form_label(:proponent_form, :state), with: address.state
@@ -66,9 +58,9 @@ RSpec.describe "CreateProponents", type: :system do
       expect(page).to have_content("#{form_label(:proponent_form, :cpf)}: "\
         "#{proponent_presenter.cpf}")
       expect(page).to have_content("#{form_label(:proponent_form, :salary)}: "\
-        "#{format_currency(proponent_presenter.salary)}")
+        "#{proponent_presenter.salary}")
       expect(page).to have_content("#{form_label(:proponent_form, :inss)}: "\
-        "#{format_currency(proponent_presenter.inss)}")
+        "#{proponent_presenter.inss}")
       expect(page).to have_content("#{form_label(:proponent_form, :street)}: "\
         "#{proponent_presenter.street}")
       expect(page).to have_content("#{model_label(:phone, :number)}: #{personal_phone.number}")

@@ -27,5 +27,18 @@ RSpec.describe CreateProponent, type: :model do
       expect(proponent_form.errors[:name]).to include(t("errors.messages.blank"))
       expect(proponent_form.errors.size).to eq(1)
     end
+
+    it "should not be able to create a new proponent with a active record error" do
+      create_proponent = CreateProponent.new(proponent_form)
+      allow(proponent_form).to receive(:as_proponent).and_return(
+        proponent_form.as_proponent.tap {|proponent| proponent[:name] = nil }
+      )
+      create_proponent_response = create_proponent.create
+
+      expect(Proponent.last).to be_nil
+      expect(create_proponent_response[:status]).to eq(:error)
+      expect(proponent_form.errors[:name]).to include(t("errors.messages.blank"))
+      expect(proponent_form.errors.size).to eq(1)
+    end
   end
 end

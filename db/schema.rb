@@ -14,21 +14,21 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_01_004435) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "addresses", force: :cascade do |t|
+  create_table "addresses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "street"
     t.string "number"
     t.string "district"
     t.string "city"
     t.string "state"
     t.string "zip_code"
-    t.bigint "proponent_id", null: false
+    t.uuid "proponent_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["proponent_id"], name: "index_addresses_on_proponent_id"
   end
 
-  create_table "phones", force: :cascade do |t|
-    t.bigint "proponent_id", null: false
+  create_table "phones", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "proponent_id", null: false
     t.string "area_code"
     t.string "number"
     t.integer "phone_type", default: 0
@@ -37,7 +37,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_01_004435) do
     t.index ["proponent_id"], name: "index_phones_on_proponent_id"
   end
 
-  create_table "proponents", force: :cascade do |t|
+  create_table "proponents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.jsonb "cpf", null: false
     t.jsonb "salary", null: false
@@ -49,7 +49,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_01_004435) do
     t.index ["cpf"], name: "index_proponents_on_cpf", unique: true
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

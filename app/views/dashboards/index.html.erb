@@ -9,7 +9,7 @@
       </thead>
       <% @dashboard_list.items.each do |salary_range, quantity| %>
         <tr class="record">
-          <td class="text-center"><%= t(".salary_ranges.#{salary_range}") %> </td>
+          <td class="text-center"><%= salary_range %> </td>
           <td class="text-center"><%= quantity %></td>
         </tr>
       <% end %>

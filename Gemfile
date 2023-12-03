@@ -2,8 +2,6 @@
 
 source "https://rubygems.org"
 
-ruby "3.2.0"
-
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.2"
 
@@ -92,4 +90,8 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+
+  gem "simplecov", require: false
+
+  gem "rails-controller-testing"
 end

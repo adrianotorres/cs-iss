@@ -37,22 +37,22 @@ class ProponentRepository
 
   def grouped_by_salary_range
     Proponent.all.reduce({
-                           one: 0,
-                           two: 0,
-                           three: 0,
-                           four: 0,
-                           five: 0
+                           I18n.t("dashboards.index.salary_ranges.one").to_s => 0,
+                           I18n.t("dashboards.index.salary_ranges.two").to_s => 0,
+                           I18n.t("dashboards.index.salary_ranges.three").to_s => 0,
+                           I18n.t("dashboards.index.salary_ranges.four").to_s => 0,
+                           I18n.t("dashboards.index.salary_ranges.five").to_s => 0
                          }) do |grouped, proponent|
-      if proponent.salary <= 1045
-        grouped.tap {|g| g[:one] += 1 }
-      elsif proponent.salary <= 2089.6
-        grouped.tap {|g| g[:two] += 1 }
-      elsif proponent.salary <= 3134.4
-        grouped.tap {|g| g[:three] += 1 }
-      elsif proponent.salary <= 6101.06
-        grouped.tap {|g| g[:four] += 1 }
+      if proponent.salary.to_f <= 1045
+        grouped.tap {|g| g[I18n.t("dashboards.index.salary_ranges.one").to_s] += 1 }
+      elsif proponent.salary.to_f <= 2089.6
+        grouped.tap {|g| g[I18n.t("dashboards.index.salary_ranges.two").to_s] += 1 }
+      elsif proponent.salary.to_f <= 3134.4
+        grouped.tap {|g| g[I18n.t("dashboards.index.salary_ranges.three").to_s] += 1 }
+      elsif proponent.salary.to_f <= 6101.06
+        grouped.tap {|g| g[I18n.t("dashboards.index.salary_ranges.four").to_s] += 1 }
       else
-        grouped.tap {|g| g[:five] += 1 }
+        grouped.tap {|g| g[I18n.t("dashboards.index.salary_ranges.five").to_s] += 1 }
       end
     end
   end

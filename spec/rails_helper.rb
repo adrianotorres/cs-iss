@@ -68,8 +68,8 @@ RSpec.configure do |config|
   # Include Factory Bot syntax to simplify calls to factories
   config.include FactoryBot::Syntax::Methods
   config.include I18nTestHelpers
-  config.include FormatCurrency
   config.include Devise::Test::IntegrationHelpers
+  config.include Devise::Test::ControllerHelpers, type: :controller
 
   ActiveJob::Base.queue_adapter = :test
 end
