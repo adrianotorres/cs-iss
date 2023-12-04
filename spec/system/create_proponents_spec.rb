@@ -53,16 +53,16 @@ RSpec.describe "CreateProponents", type: :system do
       click_button t("proponents.new.buttons.submit")
 
       expect(page).to have_content(t("proponents.messages.create_successfully"))
-      expect(page).to have_content("#{form_label(:proponent_form, :name)}: "\
-        "#{proponent_presenter.name}")
-      expect(page).to have_content("#{form_label(:proponent_form, :cpf)}: "\
-        "#{proponent_presenter.cpf}")
-      expect(page).to have_content("#{form_label(:proponent_form, :salary)}: "\
-        "#{proponent_presenter.salary}")
-      expect(page).to have_content("#{form_label(:proponent_form, :inss)}: "\
-        "#{proponent_presenter.inss}")
-      expect(page).to have_content("#{form_label(:proponent_form, :street)}: "\
-        "#{proponent_presenter.street}")
+      expect(page).to have_content("#{form_label(:proponent_form, :name)}: " \
+                                   "#{proponent_presenter.name}")
+      expect(page).to have_content("#{form_label(:proponent_form, :cpf)}: " \
+                                   "#{proponent_presenter.cpf}")
+      expect(page).to have_content("#{form_label(:proponent_form, :salary)}: " \
+                                   "#{proponent_presenter.salary}")
+      expect(page).to have_content("#{form_label(:proponent_form, :inss)}: " \
+                                   "#{proponent_presenter.inss}")
+      expect(page).to have_content("#{form_label(:proponent_form, :street)}: " \
+                                   "#{proponent_presenter.street}")
       expect(page).to have_content("#{model_label(:phone, :number)}: #{personal_phone.number}")
       expect(page).to have_content("#{model_label(:phone, :number)}: #{reference_phone.number}")
     end
@@ -75,7 +75,7 @@ RSpec.describe "CreateProponents", type: :system do
       click_button t("proponents.new.buttons.submit")
 
       expect(page).to have_content("#{form_label(:proponent_form, :cpf)} " \
-        "#{form_error(:proponent_form, 'attributes.cpf.invalid')}")
+                                   "#{form_error(:proponent_form, 'attributes.cpf.invalid')}")
     end
   end
 
