@@ -19,8 +19,10 @@ jobs:
 
     services:
       postgres:
-        image: postgres:13
+        image: postgres:15
         ports: ["5432:5432"]
+        environment:
+          POSTGRES_PASSWORD: postgres
         options:
           --health-cmd pg_isready --health-interval 10s --health-timeout 5s
           --health-retries 5
@@ -30,6 +32,7 @@ jobs:
         env:
           PGHOST: localhost
           PGUSER: postgres
+          PGPASSWORD: postgres
         run: |
           sudo apt install -yqq libpq-dev
           psql -U postgres -c "create database test"
@@ -84,6 +87,7 @@ jobs:
           DATABASE_URL: postgres:///test
           PGHOST: localhost
           PGUSER: postgres
+          PGPASSWORD: postgres
         run: |
           bundle exec rails db:migrate
           bundle exec rspec --fail-fast
@@ -95,5 +99,6 @@ jobs:
           DATABASE_URL: postgres:///test
           PGHOST: localhost
           PGUSER: postgres
+          PGPASSWORD: postgres
         run: |
           bundle exec rubocop
