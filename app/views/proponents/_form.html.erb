@@ -1,0 +1,61 @@
+<%= simple_form_for proponent_form, url: path, html: { method: { new: :post, edit: :patch }[action] }, class: 'mt-4', data: { controller: 'proponent-form', turbo: false } do |form| %>
+  <%= form.input :id, as: :hidden %>
+  <div class="row mb-3">
+    <div class="col">
+      <%= form.input :name %>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <%= form.input :cpf, input_html: { data: { 'proponent-form-target': "cpf" } } %>
+    </div>
+    <div class="col-md-6">
+      <%= form.input :birthday, as: :date, start_year: Date.today.year - 90, end_year: Date.today.year - 18 %>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <%= form.input :salary, input_html: { data: { action: "focusout->proponent-form#calculate", 'proponent-form-target': "salary" } } %>
+    </div>
+    <div class="col-md-6">
+      <%= form.input :inss, input_html: { data: { 'proponent-form-target': "inss" }, readonly: true } %>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <%= form.input :street %>
+    </div>
+    <div class="col-md-6">
+      <%= form.input :number %>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <%= form.input :district %>
+    </div>
+    <div class="col-md-6">
+      <%= form.input :city %>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <%= form.input :state %>
+    </div>
+    <div class="col-md-6">
+      <%= form.input :zip_code, input_html: { data: { 'proponent-form-target': "zipCode" } } %>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <%= render 'phone_form', form: form, type: :personal, value: proponent_form.personal %>
+    <%= render 'phone_form', form: form, type: :reference, value: proponent_form.reference %>
+    <% if proponent_form.errors[:phones].present? %>
+      <p class="text-danger"><%= proponent_form.errors[:phones].first %></p>
+    <% end %>
+  </div>
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <%= form.submit t("proponents.#{action}.buttons.submit"), class: 'btn btn-primary' %>
+      <%= link_to t("proponents.#{action}.buttons.back"), proponents_path, class: 'btn btn-secondary' %>
+    </div>
+  </div>
+<% end %>

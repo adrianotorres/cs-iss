@@ -1,0 +1,67 @@
+pt-BR:
+  proponents:
+    edit:
+      title: Altereração de Proponente
+      buttons:
+        submit: Salvar Proponente
+        back: Voltar para a lista de proponentes
+    new:
+      title: Novo Proponente
+      buttons:
+        submit: Criar Proponente
+        back: Voltar para a lista de proponentes
+    show:
+      buttons:
+        back: Voltar para a lista de proponentes
+      labels:
+        address: Endereço
+        personal_phone: Telefone Pessoal
+        reference_phone: Telefone de Referência
+    index:
+      title: Proponentes
+      table:
+        empty: Nenhum proponente cadastrado
+        confirm: Tem certeza que deseja excluir?
+        header:
+          name: Nome
+          action: Ações
+        buttons:
+          show: Visualizar
+          edit: Editar
+          destroy: Apagar
+      buttons:
+        create: Crie um novo Proponente
+        dashboard: Visualizar Dashboard
+    messages:
+      create_successfully: Proponente criado com sucesso
+      update_successfully: Proponente alterado com sucesso
+      destroy_successfully: Proponente apagado com sucesso
+      destroy_failure: Proponente já está apagado
+  activemodel:
+    attributes:
+      proponent_form:
+        name: Nome
+        cpf: CPF
+        birthday: Data de Nascimento
+        salary: Salário
+        salary_liquid: Salário Líquido
+        inss: INSS
+        street: Rua
+        number: Número
+        district: Bairro
+        city: Cidade
+        state: Estado
+        zip_code: CEP
+        phones:
+          one: Telefone
+          area_code: DDD
+          number: Telefone
+          type: Tipo de contato
+    errors:
+      models:
+        proponent_form:
+          attributes:
+            cpf:
+              invalid: não é válido!
+            phones:
+              blank: Informe pelo menos um telefone para contato!

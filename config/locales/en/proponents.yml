@@ -1,0 +1,66 @@
+en:
+  proponents:
+    edit:
+      title: Edit Proponent
+      buttons:
+        submit: Save Proponent
+        back: Back to the list of proponents
+    new:
+      title: New Proponent
+      buttons:
+        submit: Create Proponent
+        back: Back to the list of proponents
+    show:
+      buttons:
+        back: Back to the list of proponents
+      labels:
+        address: Address
+        personal_phone: Personal Phone
+        reference_phone: Reference Phone
+    index:
+      title: Proponents
+      table:
+        empty: No proponents registered
+        confirm: Are you sure you want to delete?
+        header:
+          name: Name
+          action: Actions
+        buttons:
+          show: View
+          edit: Edit
+          destroy: Delete
+      buttons:
+        create: Create a new Proponent
+        dashboard: View Dashboard
+    messages:
+      create_successfully: Proponent created successfully
+      update_successfully: Proponent updated successfully
+      destroy_successfully: Proponent deleted successfully
+  activemodel:
+    attributes:
+      proponent_form:
+        name: Name
+        cpf: CPF
+        birthday: Birthdate
+        salary: Salary
+        salary_liquid: Net Salary
+        inss: INSS
+        street: Street
+        number: Number
+        district: District
+        city: City
+        state: State
+        zip_code: ZIP Code
+        phones:
+          one: Phone
+          area_code: Area Code
+          number: Phone Number
+          type: Contact Type
+    errors:
+      models:
+        proponent_form:
+          attributes:
+            cpf:
+              invalid: is not valid!
+            phones:
+              blank: Provide at least one phone for contact!

@@ -1,0 +1,28 @@
+en:
+  errors:
+    messages:
+      taken: has already been taken!
+      blank: can't be blank!
+      invalid: is invalid!
+      confirmation: does not match the password
+  layouts:
+    application:
+      logout: Logout
+  date:
+    formats:
+      default: "%Y-%m-%d"
+      short: "%b %e"
+      long: "%B %e, %Y"
+    day_names: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    abbr_day_names: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+    month_names: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    abbr_month_names: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    order:
+      - :day
+      - :month
+      - :year
+  messages:
+    errors:
+      not_found:
+        title: 'Page not found'
+        description: 'Sorry, the page you are looking for does not exist.'

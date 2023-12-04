@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <h2><%= t('.title') %></h2>
+
+      <%= simple_form_for resource, as: resource_name, url: session_path(resource_name) do |f| %>
+        <div class="form-group">
+          <%= f.input :email, as: :email, autofocus: true, required: true, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.input :password, as: :password, autocomplete: 'off', required: true, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+        </div>
+
+        <div class="form-group">
+          <%= f.button :submit, t('.buttons.login'), class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+
+      <p class="mt-4"><%= link_to t('devise.registrations.new.link'), new_user_registration_path %></p>
+      <!-- <p><%= link_to t('devise.passwords.forgot_your_password'), new_user_password_path %></p> -->
+    </div>
+  </div>
+</div>

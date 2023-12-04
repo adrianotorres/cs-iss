@@ -1,6 +1,6 @@
-source "https://rubygems.org"
+# frozen_string_literal: true
 
-ruby "3.2.0"
+source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.2"
@@ -25,6 +25,7 @@ gem "stimulus-rails"
 
 # Bundle and process CSS [https://github.com/rails/cssbundling-rails]
 gem "cssbundling-rails"
+gem "jsbundling-rails"
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
@@ -36,14 +37,40 @@ gem "cssbundling-rails"
 # gem "bcrypt", "~> 3.1.7"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: %i[ windows jruby ]
+gem "tzinfo-data", platforms: %i[windows jruby]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
+# Access environment variables. Also includes presence validation, type coercion and default values.
+gem "dotenv"
+gem "superconfig"
+
+gem "cpf_cnpj"
+
+gem "faker"
+
+gem "kaminari"
+
+gem "bootstrap5-kaminari-views"
+
+gem "simple_form"
+
+gem "chartkick"
+
+gem "sidekiq"
+
+gem "devise", "~> 4.9"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri windows ]
+  gem "debug", platforms: %i[mri windows]
+
+  gem "factory_bot_rails"
+
+  gem "rspec-rails"
+
+  gem "shoulda-matchers"
 end
 
 group :development do
@@ -51,14 +78,20 @@ group :development do
   gem "web-console"
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
-  # gem "rack-mini-profiler"
+  gem "rack-mini-profiler"
 
-  # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
-  # gem "spring"
+  gem "rubocop"
+  gem "rubocop-fnando"
+  gem "rubocop-performance"
+  gem "rubocop-rails"
 end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+
+  gem "simplecov", require: false
+
+  gem "rails-controller-testing"
 end

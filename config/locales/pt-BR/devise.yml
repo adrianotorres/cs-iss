@@ -1,0 +1,40 @@
+pt-BR:
+  devise:
+    sessions:
+      new:
+        title: Entrar
+        link: Já tem cadastro? Entre por aqui
+        buttons:
+          login: Entrar
+    successful:
+      login: Seja bem vindo :)
+    failure:
+      user:
+        unauthenticated: Não autorizado
+      invalid: Credenciais inválidas, tente novamente.
+      not_found_in_database: Usuário não encontrado
+    activerecord:
+      attributes:
+      user:
+        email: Email
+        password: Senha
+        remember_me: Lembrar-me
+        password_confirmation: Confirme a senha
+    registrations:
+      new:
+        link: Realizar cadastro
+        title: Cadastro de usuário
+        buttons:
+          submit: Cadastrar
+        messages:
+          minimum_characters: caracteres no mínimo
+      signed_up: Agora você pode acessar o sistema
+    passwords:
+      forgot_your_password: Esqueceu sua senha?
+  simple_form:
+    labels:
+      user:
+        email: Email
+        password: Senha
+        remember_me: Lembrar-me
+        password_confirmation: Confirme a senha

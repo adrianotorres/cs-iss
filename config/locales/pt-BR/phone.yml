@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    attributes:
+      phone:
+        phone_types:
+          personal: 'Pessoal'
+          reference: 'Referência'
+        area_code: 'DDD'
+        number: 'Telefone'
+        phone_type: 'Tipo de contato'

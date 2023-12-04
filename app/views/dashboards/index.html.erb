@@ -1,0 +1,27 @@
+<div class="flex-column" style = "height: auto;">
+  <h1> <%= t('.title') %> </h1>
+
+  <table class="table table-striped">
+    <ol class="fs-2">
+      <thead class="table-secondary">
+        <td class="text-center fw-bold"> <%= t('.header.salary_ranges') %> </td>
+        <td class="text-center fw-bold"> <%= t('.header.quantity') %> </td>
+      </thead>
+      <% @dashboard_list.items.each do |salary_range, quantity| %>
+        <tr class="record">
+          <td class="text-center"><%= salary_range %> </td>
+          <td class="text-center"><%= quantity %></td>
+        </tr>
+      <% end %>
+    </ol>
+  </table>
+  <div class="row">
+    <div class="col-md-6">
+      <%= pie_chart @dashboard_list.items, id: 'dashboard-pie-chart' %>
+    </div>
+    <div class="col-md-6">
+      <%= column_chart @dashboard_list.items, id: 'dashboard-column-chart' %>
+    </div>
+  </div>
+  <%= link_to t('.buttons.proponents'), proponents_path, class: 'btn btn-secondary border-0 rounded-pill shadow p-3 m-3' %>
+</div>
