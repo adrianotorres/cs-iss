@@ -12,7 +12,7 @@ jobs:
     name: Tests with Ruby v${{ matrix.ruby }}
     runs-on: "ubuntu-latest"
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         ruby: ["3.2.0"]
         node: ["18"]
@@ -86,7 +86,7 @@ jobs:
           PGHOST: localhost
           PGUSER: postgres
         run: |
-          bundle exec rspec
+          bundle exec rspec --fail-fast
 
       - name: Run lint
         env:
