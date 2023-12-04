@@ -4,6 +4,7 @@ inherit_gem:
 AllCops:
   TargetRubyVersion: 3.2
   TargetRailsVersion: 7.1
+  NewCops: enable
 
 Metrics:
   Enabled: false

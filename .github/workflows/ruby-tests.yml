@@ -1,0 +1,99 @@
+---
+name: ruby-tests
+
+on:
+  pull_request:
+  push:
+  workflow_dispatch:
+    inputs: {}
+
+jobs:
+  build:
+    name: Tests with Ruby v${{ matrix.ruby }}
+    runs-on: "ubuntu-latest"
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby: ["3.2.2"]
+        node: ["18"]
+
+    services:
+      postgres:
+        image: postgres:15
+        ports: ["5432:5432"]
+        options:
+          --health-cmd pg_isready --health-interval 10s --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Install PostgreSQL client
+        env:
+          PGHOST: localhost
+          PGUSER: postgres
+        run: |
+          sudo apt install -yqq libpq-dev
+          psql -U postgres -c "create database test"
+
+      - uses: actions/checkout@v3
+
+      - uses: actions/cache@v3
+        with:
+          path: vendor/bundle
+          key: >
+            ${{ runner.os }}-${{ matrix.ruby }}-gems-${{
+            hashFiles('Gemfile.lock') }}
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+
+      - uses: actions/cache@v3
+        id: yarn-cache
+        with:
+          path: "**/node_modules"
+          key: >
+            ${{ runner.os }}-${{ matrix.node }}-yarn-${{
+            hashFiles('**/yarn.lock') }}
+
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Node version
+        run: node -v
+
+      - name: Ruby version
+        run: ruby -v
+
+      - name: Install npm dependencies
+        run: |
+          yarn install
+
+      - name: Install gem dependencies
+        run: |
+          gem install bundler
+          bundle config path vendor/bundle
+          bundle update --jobs 4 --retry 3
+
+      - name: Run tests
+        env:
+          RAILS_ENV: test
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+          POSITION_STACK_API_KEY: "sample-position-stack-api-key"
+          DATABASE_URL: postgres:///test
+          PGHOST: localhost
+          PGUSER: postgres
+        run: |
+          bundle exec rspec
+
+      - name: Run lint
+        env:
+          RAILS_ENV: test
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+          DATABASE_URL: postgres:///test
+          PGHOST: localhost
+          PGUSER: postgres
+        run: |
+          bundle exec rubocop

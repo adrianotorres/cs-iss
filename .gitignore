@@ -39,3 +39,4 @@
 
 /node_modules
 /coverage
+/db/redis/data/dump.rdb
