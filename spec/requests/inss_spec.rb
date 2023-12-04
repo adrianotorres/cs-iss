@@ -16,7 +16,7 @@ RSpec.describe InssController, type: :request do
 
       expect(response).to have_http_status(:ok)
 
-      json_response = JSON.parse(response.body)
+      json_response = response.parsed_body
 
       expect(json_response).to have_key("discount")
       expect(json_response["discount"]).to be_a(Float)

@@ -81,7 +81,7 @@ class ProponentForm
   end
 
   private def phones_attributes
-    phones.each_with_index.each_with_object({}) do |(phone, index), phone_attrs|
+    phones.each_with_index.with_object({}) do |(phone, index), phone_attrs|
       phone_attrs[index.to_s] = phone.attributes.slice("area_code", "number", "phone_type")
       phone_attrs
     end
