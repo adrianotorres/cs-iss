@@ -15,7 +15,7 @@
     name: "João da Silva - #{n}",
     salary:,
     inss: InssCalculator.new(salary).calculate_discount,
-    birthday: Time.zone.today - rand(18 * 365..90 * 365),
+    birthday: Time.zone.today - rand((18 * 365)..(90 * 365)),
     cpf:,
     address: Address.new(
       street: "Franciso Sá",

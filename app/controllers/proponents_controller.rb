@@ -18,23 +18,16 @@ class ProponentsController < ApplicationController
     @proponent_list = ListPresenter.new(proponent_repository.fecth_paginated(page: params[:page]))
   end
 
+  def show
+    @proponent_presenter = ProponentPresenter.new(proponent)
+  end
+
   def new
     @proponent_form = ProponentForm.new
   end
 
   def edit
     @proponent_form = ProponentForm.from(proponent)
-  end
-
-  def update
-    @proponent_form = ProponentForm.new(proponent_form_attributes)
-    update_proponent_response = UpdateProponent.new(@proponent_form).update
-
-    if update_proponent_response[:status] == :success
-      redirect_to proponents_path, notice: t("proponents.messages.update_successfully")
-    else
-      render :new
-    end
   end
 
   def create
@@ -49,8 +42,15 @@ class ProponentsController < ApplicationController
     end
   end
 
-  def show
-    @proponent_presenter = ProponentPresenter.new(proponent)
+  def update
+    @proponent_form = ProponentForm.new(proponent_form_attributes)
+    update_proponent_response = UpdateProponent.new(@proponent_form).update
+
+    if update_proponent_response[:status] == :success
+      redirect_to proponents_path, notice: t("proponents.messages.update_successfully")
+    else
+      render :new
+    end
   end
 
   def destroy

@@ -69,7 +69,7 @@ services:
 
   es-build:
     <<: *backend
-    command: yarn build --watch
+    command: yarn build:js --watch
 
   sidekiq:
     <<: *backend

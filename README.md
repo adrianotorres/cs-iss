@@ -1,4 +1,8 @@
-## CS INSS
+<h1 align="center"> CS INSS </h1>
+<p align="center">
+  <a href="https://github.com/adrianotorres/cs-iss/actions/workflows/ruby-tests.yml"><img src="https://github.com/adrianotorres/cs-iss/actions/workflows/ruby-tests.yml/badge.svg" alt="Ruby Tests" /></a>
+  <a href="https://github.com/adrianotorres/cs-iss/actions/workflows/codeql.yml"><img src="https://github.com/adrianotorres/cs-iss/actions/workflows/codeql.yml/badge.svg" alt="CodeQL Analysing" /></a>
+</p>
 
 **CS INSS** is a system built with Ruby on Rails 7.1. It aims to provide a user-friendly interface for managing proponents, including save their data, calculate INSS discount and a Dashboard.
 
