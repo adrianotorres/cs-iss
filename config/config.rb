@@ -3,7 +3,7 @@
 module CsIss
   Config = SuperConfig.new do
     mandatory :database_url, string
-    mandatory :locale, string
-    mandatory :redis_url, string
+    optional :locale, string, "pt-BR"
+    optional :redis_url, string
   end
 end
